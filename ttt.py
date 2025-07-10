@@ -10,18 +10,30 @@ class Grid:
         self.init_grid()
 
     def init_grid(self):
-        _list = []
-        for x in range(self.d):
-            _list.append(self.n)
-        _tuple = tuple(_list)
+        """
+        init grid of zeros depending on the dimension
 
+        ex: 
+            - self.d = 2 => _tuple = (3,3)
+            - self.d = 4 => _tuple = (3,3,3,3)
+        """
+        _tuple = tuple([self.n for _ in range(self.d)])
         self._grid = np.zeros(_tuple, dtype=int)
 
     @property
     def grid(self):
         return self._grid
 
+    def is_valid_position(self, x, y):
+        return 0 <= x < self.n and 0 <= y < self.n
+
     def place_mark(self, x, y, value):
+        if self._grid is None:
+            raise ValueError("Grid is not initialized")
+
+        if not self.is_valid_position(x, y):
+            raise ValueError(f"Position ({x}, {y}) is out of bounds. Valid range: 0-{self.n-1}")
+
         self._grid[x][y] = value
 
 
@@ -52,7 +64,7 @@ class Game:
                 Player(players[1], 1),  # player 2 is O = 1
             ]
         else:
-            print("error, there must be only two players")
+            raise ValueError("error, there must be only two players")
 
         if self.get_dim() > 2:
             self.init_score_grid()
@@ -90,10 +102,12 @@ class Game:
         return 0 if self.active_turn == 1 else 1
 
     def play_move(self, x, y):
-        # TODO: check if valid row and column
+        """play move in a 3x3 grid"""
 
         # check if already placed
         if self._grid.grid[x][y] != 0:
+            # raise ValueError("error, already placed")
+            # print("error, already placed")
             return "error, already placed"
 
         active_turn = self.switch_turn()
@@ -116,21 +130,10 @@ class Game:
         sums = []
         matrix = self._grid.grid
 
-        # Row sums
         row_sums = np.sum(matrix, axis=1)
-        print("Row sums:", row_sums)
-
-        # Column sums
         col_sums = np.sum(matrix, axis=0)
-        print("Column sums:", col_sums)
-
-        # Main diagonal sum (top-left to bottom-right)
         main_diag_sum = np.trace(matrix)
-        print("Main diagonal sum:", main_diag_sum)
-
-        # Anti-diagonal sum (top-right to bottom-left)
         anti_diag_sum = np.trace(np.fliplr(matrix))
-        print("Anti-diagonal sum:", anti_diag_sum)
 
         sums.extend(row_sums)
         sums.extend(col_sums)
