@@ -1,5 +1,5 @@
 [project]
-name = "ttt-py"
+name = "tic-tac-toe-py"
 version = "0.1.0"
 description = "Tic-Tac-Toe client in Python"
 readme = "README.md"
