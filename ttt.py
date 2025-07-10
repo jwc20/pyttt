@@ -4,7 +4,7 @@ from typing import List
 
 class Grid:
     def __init__(self):
-        self.n = 3
+        self.w = 3
         self.d = 2
         self._grid = None
         self.init_grid()
@@ -17,7 +17,7 @@ class Grid:
             - self.d = 2 => _tuple = (3,3)
             - self.d = 4 => _tuple = (3,3,3,3)
         """
-        _tuple = tuple([self.n for _ in range(self.d)])
+        _tuple = tuple([self.w for _ in range(self.d)])
         self._grid = np.zeros(_tuple, dtype=int)
 
     @property
@@ -25,14 +25,14 @@ class Grid:
         return self._grid
 
     def is_valid_position(self, x, y):
-        return 0 <= x < self.n and 0 <= y < self.n
+        return 0 <= x < self.w and 0 <= y < self.w
 
     def place_mark(self, x, y, value):
         if self._grid is None:
             raise ValueError("Grid is not initialized")
 
         if not self.is_valid_position(x, y):
-            raise ValueError(f"Position ({x}, {y}) is out of bounds. Valid range: 0-{self.n-1}")
+            raise ValueError(f"Position ({x}, {y}) is out of bounds. Valid range: 0-{self.w-1}")
 
         self._grid[x][y] = value
 
