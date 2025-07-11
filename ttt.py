@@ -1,11 +1,10 @@
 import numpy as np
 from typing import List
 
-
 class Grid:
-    def __init__(self):
+    def __init__(self, d):
         self.w = 3
-        self.d = 2
+        self.d = d
         self._grid = None
         self.init_grid()
 
@@ -24,6 +23,12 @@ class Grid:
     def grid(self):
         return self._grid
 
+    def get_w(self):
+        return self.w
+
+    def get_d(self):
+        return self.d
+
     def is_valid_position(self, x, y):
         return 0 <= x < self.w and 0 <= y < self.w
 
@@ -35,7 +40,6 @@ class Grid:
             raise ValueError(f"Position ({x}, {y}) is out of bounds. Valid range: 0-{self.w-1}")
 
         self._grid[x][y] = value
-
 
 class Player:
     def __init__(self, name, mark):
@@ -49,7 +53,6 @@ class Player:
     @property
     def mark(self):
         return self._mark
-
 
 class Game:
     active_turn = -1
@@ -66,8 +69,9 @@ class Game:
         else:
             raise ValueError("error, there must be only two players")
 
-        if self.get_dim() > 2:
-            self.init_score_grid()
+        # if self.get_dim() > 2:
+        #     self.init_score_grid()
+        self.sum_to_win = self.get_width() ** (self.get_dim() // 2)
 
     def init_score_grid(self):
         _d = self.get_dim() - 2
@@ -79,11 +83,14 @@ class Game:
         self._score_grid = np.zeros(_tuple, dtype=int)
 
     def get_dim(self):
-        return self._grid.grid.ndim
+        return self._grid.get_d()
 
-    @property
-    def score_grid(self):
-        return self._score_grid
+    def get_width(self):
+        return self._grid.get_w()
+
+    # @property
+    # def score_grid(self):
+    #     return self._score_grid
 
     @property
     def players(self):
@@ -151,3 +158,4 @@ class Game:
         elif -3 in all_sum:
             print(f"{self.players[0].name} wins")
             return True
+
