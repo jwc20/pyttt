@@ -2,6 +2,14 @@
 Tic-Tac-Toe client in Python
 
 
-TODO:
 
-- it looks like the game for regular and ultimate Tic-Tac-Toe is working fine ==> need refactoring the messy code!!!
+## things to know
+
+- recursive block matrix
+- block space matrix-vector
+- Block Compressed Sparse Row (BCSR)
+- trace (in a matrix)
+- minimax
+- dynamic programming, recursion
+- fractal
+
