@@ -1,7 +1,7 @@
 [project]
-name = "tic-tac-toe-py"
+name = "iuttt"
 version = "0.1.0"
-description = "Tic-Tac-Toe client in Python"
+description = "Infinite Ultimate Tic-Tac-Toe in Python"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
