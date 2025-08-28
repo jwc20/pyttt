@@ -1,6 +1,6 @@
 # notes
 
-### cool
+## cool
 
 - (Goal) https://pgrim.org/fractal/2Tic.html
 - https://www.dubberly.com/concept-maps/tic-tac-toe.html
@@ -16,7 +16,12 @@
 - https://lemmoscripts.com/wp/2018/09/03/creating-a-simple-tic-tac-toe-or-naughts-and-crosses-game-in-javascript-and-jquery/
 - https://andrewfischergames.com/blog/obfuscation
 
-### matrix
+## strategy
+
+- https://sasankyadati.github.io/Tic-Tac-Toe/
+- http://www.se16.info/hgb/tictactoe.htm
+
+## matrix
 
 - https://rocm.blogs.amd.com/high-performance-computing/spmv/part-1/README.html
 - https://medium.com/gpgpu/block-sparse-matrix-vector-multiplication-with-cuda-4e616b30267
