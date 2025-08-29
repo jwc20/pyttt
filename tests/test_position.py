@@ -53,3 +53,28 @@ class TestMinimax(TestCase):
 
     def test_o_wins_in_one(self):
         self.assertEqual(Position("oo       ", "o").minimax(), -6)
+
+    def test_cache(self):
+        self.assertEqual(Position().minimax(), 0)
+
+
+class TestBestMove(TestCase):
+    def test_x(self):
+        self.assertEqual(Position("xx       ", "x").best_move(), 2)
+
+    def test_o(self):
+        self.assertEqual(Position("oo       ", "o").best_move(), 2)
+
+class TestIsGameEnd(TestCase):
+    def test_not_end(self):
+        self.assertFalse(Position().is_game_end())
+
+    def test_x_wins(self):
+        self.assertTrue(Position("xxx      ").is_game_end())
+
+    def test_o_wins(self):
+        self.assertTrue(Position("ooo      ").is_game_end())
+
+    def test_draw(self):
+        self.assertTrue(Position("xoxxoxoxo").is_game_end())
+

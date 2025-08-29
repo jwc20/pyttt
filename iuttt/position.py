@@ -33,7 +33,13 @@ class Position:
         min_diag = is_match(self.board[DIM - 1 : SIZE - 1 : DIM - 1])
         return any(rows) or any(cols) or maj_diag or min_diag
 
+    cache = {}
     def minimax(self):
+        key = repr(self)
+        value = self.cache.get(key)
+        if value is not None: 
+            # if the value is 0, then the value is considered False. so we need to check if it's None.
+            return value
         if self.is_win_for("x"):
             return self.board.count(" ")
         if self.is_win_for("o"):
@@ -42,4 +48,12 @@ class Position:
             return 0
         values = [deepcopy(self).move(index).minimax() for index in self.possible_moves()]
         value = self.choose(max, min)(values)
+        self.cache[key] = value
         return value
+
+    def best_move(self):
+        fn = self.choose(max, min)
+        return fn(self.possible_moves(), key=lambda index: deepcopy(self).move(index).minimax())
+
+    def is_game_end(self):
+        return self.is_win_for("x") or self.is_win_for("o") or self.board.count(" ") == 0
