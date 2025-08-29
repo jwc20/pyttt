@@ -1,6 +1,7 @@
 from iuttt import Position
 from unittest import TestCase
 
+
 class TestPosisition(TestCase):
     def test_init(self):
         position = Position()
@@ -19,7 +20,7 @@ class TestPosisition(TestCase):
         self.assertEqual(Position().move(1), Position(" x       ", "o"))
 
     def test_possible_moves(self):
-        self.assertEqual(Position().move(1).possible_moves(), [0,2,3,4,5,6,7,8])
+        self.assertEqual(Position().move(1).possible_moves(), [0, 2, 3, 4, 5, 6, 7, 8])
 
 
 class TestIsWinFor(TestCase):
@@ -37,6 +38,7 @@ class TestIsWinFor(TestCase):
 
     def test_minor_diagonal(self):
         self.assertTrue(Position("  x x x  ").is_win_for("x"))
+
 
 class TestMinimax(TestCase):
     def test_x_wins(self):
@@ -65,6 +67,7 @@ class TestBestMove(TestCase):
     def test_o(self):
         self.assertEqual(Position("oo       ", "o").best_move(), 2)
 
+
 class TestIsGameEnd(TestCase):
     def test_not_end(self):
         self.assertFalse(Position().is_game_end())
@@ -77,4 +80,3 @@ class TestIsGameEnd(TestCase):
 
     def test_draw(self):
         self.assertTrue(Position("xoxxoxoxo").is_game_end())
-
