@@ -426,6 +426,27 @@ wheels = [
 ]
 
 [[package]]
+name = "iuttt"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "build" },
+    { name = "macfsevents" },
+    { name = "notebook" },
+    { name = "numpy" },
+    { name = "tabulate" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "build", specifier = ">=1.2.2.post1" },
+    { name = "macfsevents", specifier = ">=0.8.4" },
+    { name = "notebook", specifier = ">=7.4.4" },
+    { name = "numpy", specifier = ">=2.3.1" },
+    { name = "tabulate", specifier = ">=0.9.0" },
+]
+
+[[package]]
 name = "jedi"
 version = "0.19.2"
 source = { registry = "https://pypi.org/simple" }
@@ -660,6 +681,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/0a/c9/a883ce65eb27905ce
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/09/2032e7d15c544a0e3cd831c51d77a8ca57f7555b2e1b2922142eddb02a84/jupyterlab_server-2.27.3-py3-none-any.whl", hash = "sha256:e697488f66c3db49df675158a77b3b017520d772c6e1548c7d9bcc5df7944ee4", size = 59700 },
 ]
+
+[[package]]
+name = "macfsevents"
+version = "0.8.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f3/80/0d780e46286819558305c3d698f0c700cba2af0b04e86840f528cc302802/MacFSEvents-0.8.4.tar.gz", hash = "sha256:bf7283f1d517764ccdc8195b21631dbbac1c506b920bf9a8ea2956b3127651cb", size = 11573 }
 
 [[package]]
 name = "markupsafe"
@@ -1298,25 +1325,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/8a/11/965c6fd8e5cc254f1fe142d547387da17a8ebfd75a3455f637c663fb38a0/terminado-0.18.1.tar.gz", hash = "sha256:de09f2c4b85de4765f7714688fff57d3e75bad1f909b589fde880460c753fd2e", size = 32701 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/6a/9e/2064975477fdc887e47ad42157e214526dcad8f317a948dee17e1659a62f/terminado-0.18.1-py3-none-any.whl", hash = "sha256:a4468e1b37bb318f8a86514f65814e1afc977cf29b3992a4500d9dd305dcceb0", size = 14154 },
-]
-
-[[package]]
-name = "tic-tac-toe-py"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "build" },
-    { name = "notebook" },
-    { name = "numpy" },
-    { name = "tabulate" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "build", specifier = ">=1.2.2.post1" },
-    { name = "notebook", specifier = ">=7.4.4" },
-    { name = "numpy", specifier = ">=2.3.1" },
-    { name = "tabulate", specifier = ">=0.9.0" },
 ]
 
 [[package]]
