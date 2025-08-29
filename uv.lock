@@ -434,6 +434,7 @@ dependencies = [
     { name = "macfsevents" },
     { name = "notebook" },
     { name = "numpy" },
+    { name = "pynose" },
     { name = "tabulate" },
 ]
 
@@ -443,6 +444,7 @@ requires-dist = [
     { name = "macfsevents", specifier = ">=0.8.4" },
     { name = "notebook", specifier = ">=7.4.4" },
     { name = "numpy", specifier = ">=2.3.1" },
+    { name = "pynose", specifier = ">=1.5.4" },
     { name = "tabulate", specifier = ">=0.9.0" },
 ]
 
@@ -1007,6 +1009,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/b0/77/a5b8c569bf593b0140bde72ea885a803b82086995367bf2037de0159d924/pygments-2.19.2.tar.gz", hash = "sha256:636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887", size = 4968631 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c7/21/705964c7812476f378728bdf590ca4b771ec72385c533964653c68e86bdc/pygments-2.19.2-py3-none-any.whl", hash = "sha256:86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b", size = 1225217 },
+]
+
+[[package]]
+name = "pynose"
+version = "1.5.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/aa/3e/ca4f634902b4b7f877159e9d4ca0c2d192bc578bdbcbdf184c23c645599f/pynose-1.5.4.tar.gz", hash = "sha256:97dd0b7e85cf990120a01147e83ccd960c09ffcd69f6822f18e14128c6655e67", size = 123368 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/08/9b/01282c10971f13c73f91428f52c6666f05e2437f0466224f44093247bc40/pynose-1.5.4-py3-none-any.whl", hash = "sha256:ee4ae91c9e2b54d46647f5d81b95392dd27e02ed26f016dadb5f1ac10f949d96", size = 130603 },
 ]
 
 [[package]]
