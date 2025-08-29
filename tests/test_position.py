@@ -37,3 +37,19 @@ class TestIsWinFor(TestCase):
 
     def test_minor_diagonal(self):
         self.assertTrue(Position("  x x x  ").is_win_for("x"))
+
+class TestMinimax(TestCase):
+    def test_x_wins(self):
+        self.assertEqual(Position("xxx      ").minimax(), 6)
+
+    def test_o_wins(self):
+        self.assertEqual(Position("ooo      ").minimax(), -6)
+
+    def test_draw(self):
+        self.assertEqual(Position("xoxxoxoxo").minimax(), 0)
+
+    def test_x_wins_in_one(self):
+        self.assertEqual(Position("xx       ").minimax(), 6)
+
+    def test_o_wins_in_one(self):
+        self.assertEqual(Position("oo       ", "o").minimax(), -6)

@@ -1,3 +1,4 @@
+from copy import deepcopy
 DIM = 3
 SIZE = DIM * DIM
 
@@ -31,3 +32,14 @@ class Position:
         maj_diag = is_match(self.board[0 : SIZE : DIM + 1])
         min_diag = is_match(self.board[DIM - 1 : SIZE - 1 : DIM - 1])
         return any(rows) or any(cols) or maj_diag or min_diag
+
+    def minimax(self):
+        if self.is_win_for("x"):
+            return self.board.count(" ")
+        if self.is_win_for("o"):
+            return -self.board.count(" ")
+        if self.board.count(" ") == 0:
+            return 0
+        values = [deepcopy(self).move(index).minimax() for index in self.possible_moves()]
+        value = self.choose(max, min)(values)
+        return value
