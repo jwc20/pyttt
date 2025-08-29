@@ -1,0 +1,4 @@
+[submodule "sniffer"]
+	path = sniffer
+	url = git@github.com:jwc20/sniffer.git
+	branch = master
