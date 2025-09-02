@@ -48,6 +48,8 @@ class Position:
             return -self.board.count(".")
         if self.board.count(".") == 0:
             return 0
+
+        # TODO: find a way not to use deepcopy()
         values = [
             deepcopy(self).move(index).minimax() for index in self.possible_moves()
         ]
