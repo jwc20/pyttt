@@ -5,7 +5,7 @@ SIZE = DIM * DIM
 
 
 class Position:
-    def __init__(self, board=" " * 9, turn="x") -> None:
+    def __init__(self, board="." * SIZE, turn="x") -> None:
         self.board = list(board)
         self.turn = turn
 
@@ -24,7 +24,7 @@ class Position:
         return self
 
     def possible_moves(self):
-        return [index for index, piece in enumerate(self.board) if piece == " "]
+        return [index for index, piece in enumerate(self.board) if piece == "."]
 
     def is_win_for(self, piece):
         is_match = lambda line: line.count(piece) == DIM
@@ -43,10 +43,10 @@ class Position:
             # if the value is 0, then the value is considered False. so we need to check if it's None.
             return value
         if self.is_win_for("x"):
-            return self.board.count(" ")
+            return self.board.count(".")
         if self.is_win_for("o"):
-            return -self.board.count(" ")
-        if self.board.count(" ") == 0:
+            return -self.board.count(".")
+        if self.board.count(".") == 0:
             return 0
         values = [
             deepcopy(self).move(index).minimax() for index in self.possible_moves()
@@ -64,5 +64,5 @@ class Position:
 
     def is_game_end(self):
         return (
-            self.is_win_for("x") or self.is_win_for("o") or self.board.count(" ") == 0
+            self.is_win_for("x") or self.is_win_for("o") or self.board.count(".") == 0
         )
