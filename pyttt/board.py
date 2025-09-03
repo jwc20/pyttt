@@ -17,10 +17,16 @@ class Board:
 
         self.next = None
         self.prev = None
+        self._history_moves = []
+        
+        self._board = self._init_board()
 
+
+    # TODO
     def __repr__(self):
         pass
 
+    # TODO
     def __eq__(self, other):
         pass
 
