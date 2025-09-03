@@ -1,5 +1,16 @@
 # notes
 
+
+## array(list) vs string
+
+- we can store pieces(x's and o's) in an array and reference them using an array index
+    - arr = [[".", ".", "x"],[".", ".", "x"],[".", ".", "x"]] => arr[0][2] = "x"
+    - the issue is that passing around the array bunch of times can use lot of resource.
+    - also there are risks of array being altered accidently because arrays are passed between functions by reference.
+
+- string manipulation is optimized in Python
+- since strings are immutable, we need to pass around copy of the string with the cost of speed but with less risk of string being altered when passed between functions(like arrays)
+
 ## cool
 
 - (Goal) https://pgrim.org/fractal/2Tic.html
