@@ -1,6 +1,15 @@
 # notes
 
 
+## classes/files
+
+- Game
+- Board
+- Player
+- BoardState
+- GameState
+- utils.py
+
 ## array(list) vs string
 
 - we can store pieces(x's and o's) in an array and reference them using an array index
