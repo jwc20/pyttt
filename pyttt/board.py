@@ -1,14 +1,17 @@
-from iuttt.board_state import BoardState, NormalState
+from ttt.board_state import BoardState, NormalState
 
 class Board:
     def __init__(
-        self, dimension: int = 3, rows: int | None = None, columns: int | None = None
+        self, variant: str = "square", dimension: int | None = None, rows: int | None = None, columns: int | None = None
     ) -> None:
         self._dimension = dimension
         self._rows = rows
         self._columns = columns
         self._state: BoardState = NormalState(self)
         self._init_board()
+        
+        self.next = None
+        self.prev = None
 
     def _init_board(self) -> list[str]:
         """create a board either by dimension or rows and columns"""

@@ -5,8 +5,9 @@ SIZE = DIM * DIM
 
 
 class Game:
-    def __init__(self, board: str ="." * SIZE, turn: str ="x") -> None:
+    def __init__(self, board: str = "." * SIZE, turn: str = "x") -> None:
         self.board = list(board)
+        # self.players = players
         self.turn = turn
 
     def __repr__(self):
@@ -28,13 +29,14 @@ class Game:
 
     def is_win_for(self, piece):
         is_match = lambda line: line.count(piece) == DIM
-        rows = [is_match(self.board[i : i + DIM]) for i in range(0, SIZE, DIM)]
+        rows = [is_match(self.board[i: i + DIM]) for i in range(0, SIZE, DIM)]
         cols = [is_match(self.board[i:SIZE:DIM]) for i in range(0, DIM)]
-        maj_diag = is_match(self.board[0 : SIZE : DIM + 1])
-        min_diag = is_match(self.board[DIM - 1 : SIZE - 1 : DIM - 1])
+        maj_diag = is_match(self.board[0: SIZE: DIM + 1])
+        min_diag = is_match(self.board[DIM - 1: SIZE - 1: DIM - 1])
         return any(rows) or any(cols) or maj_diag or min_diag
 
     cache = {}
+
     def minimax(self):
         key = repr(self)
         value = self.cache.get(key)
@@ -65,5 +67,5 @@ class Game:
 
     def is_game_end(self):
         return (
-            self.is_win_for("x") or self.is_win_for("o") or self.board.count(".") == 0
+                self.is_win_for("x") or self.is_win_for("o") or self.board.count(".") == 0
         )
