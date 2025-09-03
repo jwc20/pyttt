@@ -6,6 +6,7 @@
 - Game
 - Board
   - factory method pattern(?)
+  - use linked list for history
 - Player
 - BoardState
   - State machine pattern

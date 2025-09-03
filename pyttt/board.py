@@ -18,6 +18,12 @@ class Board:
         self.next = None
         self.prev = None
 
+    def __repr__(self):
+        pass
+
+    def __eq__(self, other):
+        pass
+
     def _init_board(self) -> list[str]:
         """create a board either by dimension or rows and columns"""
         if self._variant:
