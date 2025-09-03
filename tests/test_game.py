@@ -1,4 +1,5 @@
-from iuttt import Game
+from pyttt.game import Game
+from pyttt.player import Player
 from unittest import TestCase
 
 

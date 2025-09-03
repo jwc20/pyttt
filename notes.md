@@ -5,8 +5,8 @@
 
 - Game
 - Board
+  - factory method pattern(?)
 - Player
-  - 
 - BoardState
   - State machine pattern
 - GameState
