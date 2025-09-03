@@ -5,7 +5,7 @@ SIZE = DIM * DIM
 
 
 class Position:
-    def __init__(self, board="." * SIZE, turn="x") -> None:
+    def __init__(self, board: str ="." * SIZE, turn: str ="x") -> None:
         self.board = list(board)
         self.turn = turn
 
@@ -35,7 +35,6 @@ class Position:
         return any(rows) or any(cols) or maj_diag or min_diag
 
     cache = {}
-
     def minimax(self):
         key = repr(self)
         value = self.cache.get(key)

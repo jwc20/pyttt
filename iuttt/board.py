@@ -8,6 +8,7 @@ class Board:
         self._init_board()
 
     def _init_board(self) -> list[str]:
+        """create a board either by dimension or rows and columns"""
         if not self._dimension and (self._rows and self._columns):
             return list("." * (self._rows * self._columns))
         return list("." * self._dimension)
