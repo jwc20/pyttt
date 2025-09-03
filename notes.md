@@ -6,8 +6,11 @@
 - Game
 - Board
 - Player
+  - 
 - BoardState
+  - State machine pattern
 - GameState
+  - State machine pattern
 - utils.py
 
 ## array(list) vs string
