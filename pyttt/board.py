@@ -1,6 +1,25 @@
 from pyttt.board_state import BoardState, NormalState
 
 
+class BoardCreateStrategy:
+    """
+    strategy to create a board string
+    """
+    pass
+
+class VariantStrategy:
+    pass
+
+class DimensionStrategy:
+    pass
+
+class RowsColumnsStrategy:
+
+class BoardCreateContext:
+    pass
+
+
+
 class Board:
     """
     the board can be initialized in two ways:
