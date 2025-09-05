@@ -1,5 +1,22 @@
 # notes
 
+## abc vs protocol
+
+- narrow protocols are more useful (Fluent Python p.476)
+  - narrow protocols have a single method
+  - we also dont have to use a decorator in a protocol
+```
+sometimes you see a protocol defined near the function that uses it—that is,
+defined in “client code” instead of being defined in a library. This is makes it easy to
+create new types to call that function, which is good for extensibility and testing with
+mocks.
+The practices of narrow protocols and client-code protocols both avoid unnecessary
+tight coupling, in line with the Interface Segregation Principle, which we can summa‐
+rize as “Clients should not be forced to depend upon interfaces that they do not use.”
+```
+
+  - https://peps.python.org/pep-0544/ 
+
 
 ## classes/files
 
