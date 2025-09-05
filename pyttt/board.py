@@ -20,23 +20,38 @@ class Board:
         self._dimension = dimension
         self._rows = rows
         self._columns = columns
-        self._state: BoardState = NormalState(self)
+
         self.next = None
         self.prev = None
         self._history_moves = []
+
         self._board = self._init_board()
 
-    def _init_board(self) -> list[str]:
-        """create a board either by dimension or rows and columns"""
-        if self._variant:
-            return self._init_variant_board()
-        if not self._dimension and (self._rows and self._columns):
-            return list("." * (self._rows * self._columns))
-        return list("." * self._dimension)
+        # TODO
+        # self._state: BoardState = NormalState(self)
 
-    def _init_variant_board(self) -> list[str]:
+    def _init_board(self) -> str | None:
+        """
+        create a board by: 
+            - variant
+            - dimension (width of matrix)
+            - rows and columns
+        """
+        if self._variant and not (self._dimension or (self._rows and self._columns)):
+            return self._init_variant_board()
+
+        if self._dimension and not (self._variant or (self._rows and self._columns)):
+            return "." * self._dimension
+
+        if (self._rows and self._columns) and not (self._variant or self._dimension):
+            return "." * (self._rows * self._columns)
+        
+        if not (self._variant or self._dimension or (self._rows and self._columns)):
+            raise ValueError("Invalid board initialization")
+
+    def _init_variant_board(self) -> str:
         if self._variant == "classic":
-            return list("." * 9)
+            return "." * 9
         raise ValueError(f"Unknown variant: {self._variant}")
 
     # TODO
