@@ -6,13 +6,17 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "build>=1.2.2.post1",
-    "macfsevents>=0.8.4",
     "numpy>=2.3.1",
-    "pynose>=1.5.4",
-    "tabulate>=0.9.0",
 ]
 
 [dependency-groups]
 dev = [
     "ruff>=0.12.12",
+    "macfsevents>=0.8.4",
+    "pynose>=1.5.4",
+]
+
+[tool.ruff]
+exclude = [
+    "scent.py",
 ]
