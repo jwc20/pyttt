@@ -1,7 +1,6 @@
 from unittest import TestCase
 
 from pyttt.game import Game
-from pyttt.player import Player
 
 
 class TestGame(TestCase):

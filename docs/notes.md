@@ -4,14 +4,12 @@
 
 - numpy is faster than nested list
 - numpy is more memory efficient than nested list
-- 'nuff said
 
 ### example
 
 without numpy:
 ```python
 board_str = "xoxoxoxox x..x..xo. x..x..xo. ooooooooo x..x..xo. x..x..xo. xoxoxoxox x..x..xo. x..x..xo."
-
 ```
 
 ## players and multi-players
@@ -26,10 +24,11 @@ board_str = "xoxoxoxox x..x..xo. x..x..xo. ooooooooo x..x..xo. x..x..xo. xoxoxox
     - we also dont have to use a decorator in a protocol
 
 ```
-sometimes you see a protocol defined near the function that uses it—that is,
+...sometimes you see a protocol defined near the function that uses it—that is,
 defined in “client code” instead of being defined in a library. This is makes it easy to
 create new types to call that function, which is good for extensibility and testing with
 mocks.
+
 The practices of narrow protocols and client-code protocols both avoid unnecessary
 tight coupling, in line with the Interface Segregation Principle, which we can summa‐
 rize as “Clients should not be forced to depend upon interfaces that they do not use.”

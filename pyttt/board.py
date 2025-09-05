@@ -1,4 +1,3 @@
-from pyttt.board_state import BoardState, NormalState
 from pyttt.board_strategy import DimensionStrategy, RowsColumnsStrategy, VariantStrategy
 
 

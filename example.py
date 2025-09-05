@@ -1,4 +1,4 @@
-from pyttt import Board, Game
+from pyttt import Board
 
 if __name__ == "__main__":
     board = Board()
