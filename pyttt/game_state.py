@@ -5,7 +5,7 @@ class GameState(Protocol):
     """
     there are 3 states:
     - ready
-    - in progress
+    - playing
     - locked (ended or before ready)
     
     """
