@@ -1,9 +1,23 @@
 # notes
 
+## numpy vs nested list for board
+
+- numpy is faster than nested list
+- numpy is more memory efficient than nested list
+- 'nuff said
+
+### example
+
+without numpy:
+```python
+board_str = "xoxoxoxox x..x..xo. x..x..xo. ooooooooo x..x..xo. x..x..xo. xoxoxoxox x..x..xo. x..x..xo."
+
+```
+
 ## players and multi-players
 
 - this should allow more than 2 players to play
-- where each players are assigned to either "X" or "O" teams
+- where each player are assigned to either "X" or "O" teams
 
 ## abc vs protocol
 
