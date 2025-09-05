@@ -10,8 +10,16 @@ class TestBoard(TestCase):
     def test_init_variant_classic(self):
         board = Board(variant="classic")
         self.assertEqual(board.board, "." * 9)
+        
+    def test_init_variant_ultimate(self):
+        board = Board(variant="ultimate")
+        self.assertEqual(board.board, "." * 81)
 
-    def test_init_dimension(self):
+    def test_init_dimension_3x3(self):
+        board = Board(dimension=3)
+        self.assertEqual(board.board, "." * 9)
+        
+    def test_init_dimension_9x9(self):
         board = Board(dimension=9)
         self.assertEqual(board.board, "." * 81)
 

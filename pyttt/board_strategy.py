@@ -21,6 +21,8 @@ class VariantStrategy:
     def create_board(self):
         if self.config["variant"] == "classic":
             return "." * 9
+        if self.config["variant"] == "ultimate":
+            return "." * 81
         raise ValueError(f"Unknown variant: {self.config["variant"]}")
 
 
