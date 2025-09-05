@@ -1,5 +1,5 @@
 from pyttt.board_state import BoardState, NormalState
-from pyttt.board_strategy import VariantStrategy, DimensionStrategy, RowsColumnsStrategy
+from pyttt.board_strategy import DimensionStrategy, RowsColumnsStrategy, VariantStrategy
 
 
 class Board:

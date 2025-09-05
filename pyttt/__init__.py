@@ -1,5 +1,5 @@
-from .game import Game
 from .board import Board
+from .game import Game
 from .player import Player
 
-__all__ = ["Game", "Board", "Player"]
+__all__ = ["Board", "Game", "Player"]
