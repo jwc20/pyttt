@@ -2,8 +2,18 @@ from pyttt.board_state import BoardState, NormalState
 
 
 class Board:
+    """
+    the board can be initialized in two ways:
+    - by variant (classic, ultimate, etc.)
+    - by dimension 
+    - by rows and columns
+    
+    the Board class also acts as Context of the BoardState interface
+    """
+
     def __init__(
-            self, variant: str | None = None,
+            self,
+            variant: str | None = None,
             dimension: int | None = None,
             rows: int | None = None,
             columns: int | None = None
@@ -13,22 +23,10 @@ class Board:
         self._rows = rows
         self._columns = columns
         self._state: BoardState = NormalState(self)
-        self._init_board()
-
         self.next = None
         self.prev = None
         self._history_moves = []
-        
         self._board = self._init_board()
-
-
-    # TODO
-    def __repr__(self):
-        pass
-
-    # TODO
-    def __eq__(self, other):
-        pass
 
     def _init_board(self) -> list[str]:
         """create a board either by dimension or rows and columns"""
@@ -43,5 +41,14 @@ class Board:
             return list("." * 9)
         raise ValueError(f"Unknown variant: {self._variant}")
 
+    # TODO
     def set_state(self):
+        pass
+
+    # TODO
+    def __repr__(self):
+        pass
+
+    # TODO
+    def __eq__(self, other):
         pass
