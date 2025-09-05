@@ -36,7 +36,7 @@ rize as “Clients should not be forced to depend upon interfaces that they do n
 - we can store pieces(x's and o's) in an array and reference them using an array index
     - arr = [[".", ".", "x"],[".", ".", "x"],[".", ".", "x"]] => arr[0][2] = "x"
     - the issue is that passing around the array bunch of times can use lot of resource.
-    - also there are risks of array being altered accidently because arrays are passed between functions by reference.
+    - also there are risks of array being altered accidentally because arrays are passed between functions by reference.
 
 - string manipulation is optimized in Python
 - since strings are immutable, we need to pass around copy of the string with the cost of speed but with less risk of
@@ -44,6 +44,36 @@ rize as “Clients should not be forced to depend upon interfaces that they do n
     - using immutable data types prevents using `deepcopy()` and deep copying is slow and use up memory
 
 ### string manipulation and getting position
+
+- have string like "xxxxxxxxx x..x..xo. x..x..xo. ooooooooo x..x..xo. x..x..xo. xoxoxoxox x..x..xo. x..x..xo." for
+  ultimate tic-tac-toe.
+
+3x3 board/grid of tic-tac-toe squares
+
+```
+xxxxxxxxx x..x..xo. x..x..xo. 
+ooooooooo x..x..xo. x..x..xo. 
+xoxoxoxox x..x..xo. x..x..xo.
+```
+
+or
+
+``` 
+xxx x.. x..
+xxx x.. x..
+xxx xo. xo.
+
+ooo x.. x..
+ooo x.. x..
+ooo xo. xo. 
+
+xox x.. x..
+oxo x.. x..
+xox xo. xo.
+```
+
+- each 3x3 square is separated by whitespace
+
 
 - multi-dimensional arrays are slow and uses lot of memory so we should instead use 1d-array (a block of memory)
 - calculate the index of the 1d-array from the matrix row and column
