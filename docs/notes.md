@@ -1,5 +1,10 @@
 # notes
 
+## players and multi-players
+
+- this should allow more than 2 players to play
+- where each players are assigned to either "X" or "O" teams
+
 ## abc vs protocol
 
 - narrow protocols are more useful (Fluent Python p.476)
