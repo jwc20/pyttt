@@ -3,8 +3,9 @@
 ## abc vs protocol
 
 - narrow protocols are more useful (Fluent Python p.476)
-  - narrow protocols have a single method
-  - we also dont have to use a decorator in a protocol
+    - narrow protocols have a single method
+    - we also dont have to use a decorator in a protocol
+
 ```
 sometimes you see a protocol defined near the function that uses it—that is,
 defined in “client code” instead of being defined in a library. This is makes it easy to
@@ -15,20 +16,19 @@ tight coupling, in line with the Interface Segregation Principle, which we can s
 rize as “Clients should not be forced to depend upon interfaces that they do not use.”
 ```
 
-  - https://peps.python.org/pep-0544/ 
-
+- https://peps.python.org/pep-0544/
 
 ## classes/files
 
 - Game
 - Board
-  - factory method pattern(?)
-  - linked list for history
+    - factory method pattern(?)
+    - linked list for history
 - Player
 - BoardState
-  - State machine pattern
+    - State machine pattern
 - GameState
-  - State machine pattern
+    - State machine pattern
 - utils.py
 
 ## array(list) vs string
@@ -39,7 +39,21 @@ rize as “Clients should not be forced to depend upon interfaces that they do n
     - also there are risks of array being altered accidently because arrays are passed between functions by reference.
 
 - string manipulation is optimized in Python
-- since strings are immutable, we need to pass around copy of the string with the cost of speed but with less risk of string being altered when passed between functions(like arrays)
+- since strings are immutable, we need to pass around copy of the string with the cost of speed but with less risk of
+  string being altered when passed between functions(like arrays)
+    - using immutable data types prevents using `deepcopy()` and deep copying is slow and use up memory
+
+### string manipulation and getting position
+
+- multi-dimensional arrays are slow and uses lot of memory so we should instead use 1d-array (a block of memory)
+- calculate the index of the 1d-array from the matrix row and column
+    - (e.g. row * width + col)
+- matrix multiplication requires going through rows and the columns of the matrix
+    - (prob have to use cross product to determine positions of the squares in the board using the board string ("
+      x..x..xo."))
+    - must consider recursion for infinite fractal board
+
+---
 
 ## cool
 
