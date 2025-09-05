@@ -37,7 +37,7 @@ def execute_ruff(*args):
     if ruff_result.returncode != 0:
         print(termstyle.bg_blue("\n" + "=" * 70))
         print(termstyle.bg_yellow("Ruff check: "))
-        print(ruff_result.stdout)
+        print(termstyle.green(ruff_result.stdout))
         print(termstyle.bg_blue("\n" + "=" * 70))
         print("\n")
 
