@@ -1,24 +1,31 @@
 from typing import Protocol
+from dataclasses import dataclass
 
 
 class BoardState(Protocol):
     """
     There are 4 states for the board:
-    - NormalState
-    - LockedNormalState
-    - SelectedState
-    - LockedSelectedState
+    - NormalState: it's your turn and you have not placed the piece on the board
+    - LockedNormalState: it's the opponent's turn and they have not placed the piece on the board
+    
+    - SelectedState: it's your turn and you have placed the piece on the board
+    - LockedSelectedState: it's the opponent's turn and they have placed the piece on the board
+    
     
     The board state is Locked while it is the opponents turn.
+        - (it's locked when its not your turn)
     The board state is not Locked during your turn.
     
-    The board state is Selected when a player has selected a position.
+    
+    The board state is Selected when a player has selected a position. 
+        - (the player has placed the piece on the board) 
     The board state is not Selected when a player has not selected a position.
+    
+    
+    note:
+        - After selecting a position, the player must confirm their play to change turn 
+        - NormalState -> SelectedState -> LockedNormalState -> LockedSelectedState -> NormalState
     """
-    pass
-
-
-class BoardContext(Protocol):
     pass
 
 
@@ -27,21 +34,47 @@ class LockedBoardState(BoardState):
     pass
 
 
-class NormalState(BoardState):
-    """current player's turn and no position is selected"""
+#############################################
+
+class BoardContext(Protocol):
+    board_str: str
+
+    def set_state(self, state: BoardState): ...
+
+
+#############################################
+
+@dataclass
+class NormalState:
+    """
+    parent: BoardState
+    current player's turn and no position is selected
+    """
     pass
 
 
-class LockedNormalState(LockedBoardState):
-    """opponent's turn and no position is selected"""
+@dataclass
+class LockedNormalState:
+    """
+    parent: LockedBoardState
+    opponent's turn and no position is selected
+    """
     pass
 
 
-class SelectedState(BoardState):
-    """current player's turn and a position is selected"""
+@dataclass
+class SelectedState:
+    """
+    parent: BoardState
+    current player's turn and a position is selected
+    """
     pass
 
 
-class LockedSelectedState(LockedBoardState):
-    """opponent's turn and a position is selected"""
+@dataclass
+class LockedSelectedState:
+    """
+    parent: LockedBoardState
+    opponent's turn and a position is selected
+    """
     pass
