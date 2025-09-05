@@ -5,9 +5,6 @@ SIZE = DIM * DIM
 
 
 class Game:
-    """
-    the Game class is the Context of the GameState interface
-    """
     def __init__(self, board: str = "." * SIZE, turn: str = "x") -> None:
         self.board = list(board)
         # self.players = players

@@ -1,5 +1,6 @@
 from typing import Protocol
 
+
 class BoardState(Protocol):
     """
     There are 4 states for the board:
@@ -14,10 +15,12 @@ class BoardState(Protocol):
     The board state is Selected when a player has selected a position.
     The board state is not Selected when a player has not selected a position.
     """
+    pass
 
-    def __init__(self, board) -> None:
-        self.board = board
-    
+
+class BoardContext(Protocol):
+    pass
+
 
 class LockedBoardState(BoardState):
     """parent state of LockedNormalState and LockedSelectedState"""

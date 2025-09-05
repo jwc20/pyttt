@@ -7,8 +7,6 @@ class Board:
     - by variant (classic, ultimate, etc.)
     - by dimension 
     - by rows and columns
-    
-    the Board class also acts as Context of the BoardState interface
     """
 
     def __init__(
