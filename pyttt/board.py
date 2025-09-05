@@ -1,12 +1,21 @@
 from pyttt.board_state import BoardState, NormalState
 from pyttt.board_strategy import VariantStrategy, DimensionStrategy, RowsColumnsStrategy
 
+
 class Board:
     """
-    the board can be initialized in two ways:
-    - by variant (classic, ultimate, etc.)
-    - by dimension 
-    - by rows and columns
+    the board is represented as a string of "x", "o", and "." characters
+    
+    ex: 
+        - 3x3 board: "xoxoxoxox"
+        - 9x9 board: "xxxxxxxxx x..x..xo. x..x..xo. ooooooooo x..x..xo. x..x..xo. xoxoxoxox x..x..xo. x..x..xo."
+            - each 3x3 square is separated by whitespace
+    
+    
+    the board can be initialized in three ways:
+        - by variant (classic, ultimate, etc.)
+        - by dimension 
+        - by rows and columns
     """
 
     def __init__(
@@ -29,7 +38,7 @@ class Board:
 
         self.board = self._init_board()
 
-        # TODO
+        # TODO: implement state
         # self._state: BoardState = NormalState(self)
 
     def _init_board(self) -> str | None:
