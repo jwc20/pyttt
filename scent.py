@@ -3,9 +3,7 @@ for sniffer auto testing
 """
 
 import os
-
 import termstyle
-
 from sniffer.api import *
 
 pass_fg_color = termstyle.green
@@ -42,18 +40,3 @@ def execute_ruff_check(*args):
         print(termstyle.bg_blue("\n" + "=" * 70))
         print("\n")
     return ruff_result.returncode == 0
-
-# @runnable
-# def execute_ruff_check_imports(*args):
-#     import subprocess
-#     ruff_result = subprocess.run(
-#         ["ruff", "check", "--select", "I", "RUF022"], capture_output=True, text=True
-#     )
-#     if ruff_result.returncode != 0:
-#         print(termstyle.bg_blue("\n" + "=" * 70))
-#         print(termstyle.bg_yellow("Ruff fix: "))
-#         print(termstyle.yellow(ruff_result.stdout))
-#         print(termstyle.bg_blue("\n" + "=" * 70))
-#         print("\n")
-# 
-#     return ruff_result.returncode == 0
