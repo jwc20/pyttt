@@ -8,8 +8,7 @@ class Board:
     ex: 
         - 3x3 board: "xoxoxoxox"
         - 9x9 board: "xxxxxxxxx x..x..xo. x..x..xo. ooooooooo x..x..xo. x..x..xo. xoxoxoxox x..x..xo. x..x..xo."
-            - each 3x3 square is separated by whitespace
-    
+            - no whitespace in real board string
     
     the board can be initialized in three ways:
         - by variant (classic, ultimate, etc.)
@@ -72,8 +71,49 @@ class Board:
 
     # TODO
     def __repr__(self):
-        pass
+        return self.board
 
     # TODO
     def __eq__(self, other):
         pass
+
+    def get_dimension(self) -> int:
+        return int(len(self.board) ** (1 / 2))
+
+    def get_coordinates_str(self, dim: int) -> str:
+        return "".join([str(i) for i in range(dim)])
+
+    def cross(self, vector_a, vector_b) -> tuple:
+        """
+        get 3x3 boards from board string
+        (does not work for non-square matrices) -> TODO
+        do cross product of rows and columns to get all possible 3x3 boards
+        """
+        return tuple(a + "," + b for a in vector_a for b in vector_b)
+
+
+if __name__ == "__main__":
+    board_str = Board(dimension=(3 ** 2))
+    print(board_str)
+    
+    dim = board_str.get_dimension()
+    coords = board_str.get_coordinates_str(dim)
+    rows, cols = coords, coords
+    squares = board_str.cross(rows, cols)
+    print(squares)
+    coords_3 = tuple([coords[i:i+3] for i in range(0, len(coords), 3)])
+    print("coords_3", coords_3)
+    
+    all_boxes = [board_str.cross(rs, cs) for rs in coords_3 for cs in coords_3]
+    all_units = [board_str.cross(rows, c) for c in cols] + [board_str.cross(r, cols) for r in rows] + all_boxes
+
+    units = {s: tuple(u for u in all_units if s in u) for s in squares}
+    peers = {s: set().union(*units[s]) - {s} for s in squares}
+
+    from pprintpp import pprint 
+    pprint(all_boxes)
+    pprint(all_units)
+    pprint(units)
+    pprint(peers)
+    pprint(units["0,0"])
+    pprint(peers["0,0"])

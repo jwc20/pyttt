@@ -31,3 +31,10 @@ class TestBoard(TestCase):
     def test_init_rows_columns_3x4(self):
         board = Board(rows=3, columns=4)
         self.assertEqual(board.board, "." * 12)
+        
+    def test_cross(self):
+        board = Board(dimension=3)
+        dim = board.get_dimension()
+        coords = board.get_coordinates_str(dim)
+        self.assertEqual(board.cross(coords, coords), ("0,0", "0,1", "0,2", "1,0", "1,1", "1,2", "2,0", "2,1", "2,2"))
+        
