@@ -157,3 +157,10 @@ class Board:
                 result.append(line)
 
         return "\n".join(result)
+
+
+    def get_board_str_from_box(self):
+        ...
+
+    def get_square_value(self):
+        ...

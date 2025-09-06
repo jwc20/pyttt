@@ -1,7 +1,7 @@
 from pyttt import Board
 
 if __name__ == "__main__":
-    _board_str = Board(dimension=(3 ** 1))
+    _board_str = Board(dimension=(3 ** 2))
 
     _dim = _board_str.get_dimension()
     _coords = _board_str.get_coordinates_str(_dim)
@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     from pprintpp import pprint
 
-    pprint(_board_str)
+    # pprint(_board_str)
     # pprint(_squares)
     # pprint("coords_3", _coords_3)
     # pprint(_all_boxes)
@@ -28,7 +28,43 @@ if __name__ == "__main__":
 
     _grid = _board_str.parse(_board_str.board, _squares)
     
-    print(_grid)
+    # print(_grid)
+    # print(_board_str.picture(_grid, _rows, _cols))
+
+
+
+
+    # pprint(_all_boxes)
+    print("\n")
+    print("\n")
+    print("\n")
+    # pprint(_all_boxes[0])
     
-    print(_board_str.picture(_grid, _rows, _cols))
+    # def get_box_values(box):
+    #     return "".join(_grid[box])
+    
+
+    # need to get box values ("x", "o", or ".") with coordinates ("0,0", "0,1", etc.)
+    # returns a string of "x", "o", or ".". (example: "xoxoxoxox")
+    _box_0 = _all_boxes[0]
+    print(_box_0)
+
+    _r = []
+
+    for s in _box_0:
+        _r.append(_grid[s])
+
+    _box_0_str = "".join(_r)
+    print(_box_0_str)
+    
+    
+
+
+
+    
+    
+
+
+    
+    
     
