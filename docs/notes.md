@@ -1,5 +1,9 @@
 # notes
 
+## board/grid coordinate system
+
+![CleanShot 2025-09-06 at 15 23 55@2x](https://github.com/user-attachments/assets/7645830c-ad34-42fe-8b35-4c324f59dc4d)
+
 ## numpy vs nested list for board
 
 - numpy is faster than nested list
