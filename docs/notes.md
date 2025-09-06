@@ -12,6 +12,7 @@
 ### example
 
 without numpy:
+
 ```python
 board_str = "xoxoxoxox x..x..xo. x..x..xo. ooooooooo x..x..xo. x..x..xo. xoxoxoxox x..x..xo. x..x..xo."
 ```
@@ -113,9 +114,16 @@ xox xo. xo.
 - https://www.dubberly.com/concept-maps/tic-tac-toe.html
 - https://www.talkingelectronics.com/projects/TicTacToe/TicTacToe-P1.html
 - https://xkcd.com/832/
+- https://www.cs.umd.edu/~gasarch/COURSES/752/S22/Combgamesttt.pdf
+- https://dhkts1.github.io/ultimate-nd-tictactoe-3d/
+- https://nrich.maths.org/articles/sprouts-explained
+- https://en.wikipedia.org/wiki/Gomoku
+- https://en.wikipedia.org/wiki/Connect6
+- http://www.geom.uiuc.edu/video/sos/materials/surfaces/tictactoe.html
 
 ## links
 
+- https://hn.algolia.com/?dateRange=all&page=0&prefix=false&query=tic%20tac%20toe&sort=byPopularity&type=story
 - https://en.wikipedia.org/wiki/Tic-tac-toe_variants
 - https://sasankyadati.github.io/Tic-Tac-Toe/
 - https://ranger.uta.edu/~weems/NOTES6319/PAPERSONE/patashnik.pdf
@@ -130,22 +138,3 @@ xox xo. xo.
 
 - https://sasankyadati.github.io/Tic-Tac-Toe/
 - http://www.se16.info/hgb/tictactoe.htm
-
-## matrix
-
-- https://rocm.blogs.amd.com/high-performance-computing/spmv/part-1/README.html
-- https://medium.com/gpgpu/block-sparse-matrix-vector-multiplication-with-cuda-4e616b30267
-- https://developer.nvidia.com/blog/accelerating-matrix-multiplication-with-block-sparse-format-and-nvidia-tensor-cores/
-- https://www.geeksforgeeks.org/dsa/maximum-size-sub-matrix-with-all-1s-in-a-binary-matrix/
-- https://www.researchgate.net/publication/288933300_Compressed_k_d-tree_for_temporal_graphs
-- https://www.researchgate.net/publication/26487637_Scalable_Multiple-Description_Image_Coding_Based_on_Embedded_Quantization
-
-## things to know
-
-- recursive block matrix
-- block space matrix-vector
-- Block Compressed Sparse Row (BCSR)
-- trace (in a matrix)
-- minimax
-- dynamic programming, recursion
-- fractal
