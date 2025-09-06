@@ -112,6 +112,7 @@ xox xo. xo.
 
 ## links
 
+- https://en.wikipedia.org/wiki/Tic-tac-toe_variants
 - https://sasankyadati.github.io/Tic-Tac-Toe/
 - https://ranger.uta.edu/~weems/NOTES6319/PAPERSONE/patashnik.pdf
 - https://leetcode.ca/2016-11-12-348-Design-Tic-Tac-Toe/

@@ -1,7 +1,7 @@
 from pyttt import Board
 
 if __name__ == "__main__":
-    _board_str = Board(dimension=(3 ** 2))
+    _board_str = Board(dimension=(3 ** 1))
 
     _dim = _board_str.get_dimension()
     _coords = _board_str.get_coordinates_str(_dim)
@@ -25,3 +25,10 @@ if __name__ == "__main__":
     # pprint(_peers)
     # pprint(_units["0,0"])
     # pprint(_peers["0,0"])
+
+    _grid = _board_str.parse(_board_str.board, _squares)
+    
+    print(_grid)
+    
+    print(_board_str.picture(_grid, _rows, _cols))
+    
