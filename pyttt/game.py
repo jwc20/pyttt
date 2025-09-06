@@ -5,6 +5,8 @@ SIZE = DIM * DIM
 
 
 class Game:
+    cache = {}
+
     def __init__(self, board: str = "." * SIZE, turn: str = "x") -> None:
         self.board = list(board)
         # self.players = players
@@ -28,14 +30,14 @@ class Game:
         return [index for index, piece in enumerate(self.board) if piece == "."]
 
     def is_win_for(self, piece):
+        """checks 3x3 board if the given piece has won"""
         is_match = lambda line: line.count(piece) == DIM
+        
         rows = [is_match(self.board[i: i + DIM]) for i in range(0, SIZE, DIM)]
         cols = [is_match(self.board[i:SIZE:DIM]) for i in range(0, DIM)]
         maj_diag = is_match(self.board[0: SIZE: DIM + 1])
         min_diag = is_match(self.board[DIM - 1: SIZE - 1: DIM - 1])
         return any(rows) or any(cols) or maj_diag or min_diag
-
-    cache = {}
 
     def minimax(self):
         key = repr(self)
