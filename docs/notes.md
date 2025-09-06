@@ -112,6 +112,8 @@ xox xo. xo.
 
 ## links
 
+- https://sasankyadati.github.io/Tic-Tac-Toe/
+- https://ranger.uta.edu/~weems/NOTES6319/PAPERSONE/patashnik.pdf
 - https://leetcode.ca/2016-11-12-348-Design-Tic-Tac-Toe/
 - https://leetcode.com/problems/find-winner-on-a-tic-tac-toe-game/description/
 - https://leetcode.com/problems/valid-tic-tac-toe-state/description/
