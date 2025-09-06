@@ -92,28 +92,49 @@ class Board:
         return tuple(a + "," + b for a in vector_a for b in vector_b)
 
 
+    def get_three_by_three(self, board_str):
+        return [board_str[i:i+3] for i in range(0, len(board_str), 3)]
+
+    def get_all_boxes(self, rows, cols):
+        return [self.cross(rs, cs) for rs in rows for cs in cols]
+    
+    def get_all_units(self, rows, cols, boxes):
+        return [self.cross(rows, c) for c in cols] + [self.cross(r, cols) for r in rows] + boxes
+    
+    def get_all_peers(self, units):
+        return {s: set().union(*units[s]) - {s} for s in _squares}
+    
+    def get_units(self, squares, all_units):
+        return {s: tuple(u for u in all_units if s in u) for s in squares}
+    
+    def get_peers(self, squares, units):
+        return {s: set().union(*units[s]) - {s} for s in squares}
+    
+    
+
+
 if __name__ == "__main__":
-    board_str = Board(dimension=(3 ** 2))
-    print(board_str)
+    _board_str = Board(dimension=(3 ** 2))
     
-    dim = board_str.get_dimension()
-    coords = board_str.get_coordinates_str(dim)
-    rows, cols = coords, coords
-    squares = board_str.cross(rows, cols)
-    print(squares)
-    coords_3 = tuple([coords[i:i+3] for i in range(0, len(coords), 3)])
-    print("coords_3", coords_3)
     
-    all_boxes = [board_str.cross(rs, cs) for rs in coords_3 for cs in coords_3]
-    all_units = [board_str.cross(rows, c) for c in cols] + [board_str.cross(r, cols) for r in rows] + all_boxes
+    _dim = _board_str.get_dimension()
+    _coords = _board_str.get_coordinates_str(_dim)
+    _rows, _cols = _coords, _coords
+    _squares = _board_str.cross(_rows, _cols)
+    _coords_3 = _board_str.get_three_by_three(_coords)
+    _all_boxes = _board_str.get_all_boxes(_rows, _cols)
+    _all_units = _board_str.get_all_units(_rows, _cols, _all_boxes)
+    _units = _board_str.get_units(_squares, _all_units)
+    _peers = _board_str.get_peers(_squares, _units)
 
-    units = {s: tuple(u for u in all_units if s in u) for s in squares}
-    peers = {s: set().union(*units[s]) - {s} for s in squares}
+    from pprintpp import pprint
 
-    from pprintpp import pprint 
-    pprint(all_boxes)
-    pprint(all_units)
-    pprint(units)
-    pprint(peers)
-    pprint(units["0,0"])
-    pprint(peers["0,0"])
+    print(_board_str)
+    print(_squares)
+    print("coords_3", _coords_3)
+    pprint(_all_boxes)
+    pprint(_all_units)
+    pprint(_units)
+    pprint(_peers)
+    pprint(_units["0,0"])
+    pprint(_peers["0,0"])
