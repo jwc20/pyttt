@@ -32,11 +32,25 @@ def execute_nose(*args):
 @runnable
 def execute_ruff_check(*args):
     import subprocess
-    ruff_result = subprocess.run(["ruff", "check", "."], capture_output=True, text=True)
+    ruff_result = subprocess.run(["uv", "run", "ruff", "check", "."], capture_output=True, text=True)
     if ruff_result.returncode != 0:
-        print(termstyle.bg_blue("\n" + "=" * 70))
+        print(termstyle.bg_green("\n" + "=" * 70))
         print(termstyle.bg_yellow("Ruff check: "))
         print(termstyle.green(ruff_result.stdout))
-        print(termstyle.bg_blue("\n" + "=" * 70))
+        print(termstyle.bg_green("\n" + "=" * 70))
         print("\n")
     return ruff_result.returncode == 0
+
+
+@runnable
+def execute_example_file(*args):
+    import subprocess
+    example_result = subprocess.run(["uv", "run", "example.py"], capture_output=True, text=True)
+
+    print(termstyle.bg_blue("\n" + "=" * 70))
+    print(termstyle.bg_yellow("example.py: "))
+    print(termstyle.blue(example_result.stdout))
+    print(termstyle.bg_blue("\n" + "=" * 70))
+    print("\n")
+
+    return True
