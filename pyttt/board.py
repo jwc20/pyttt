@@ -100,7 +100,9 @@ class Board:
         return tuple([board_str[i : i + 3] for i in range(0, len(board_str), 3)])
 
     def get_all_boxes(self, rows, cols) -> list:
-        print(rows, cols)
+        """
+        get all possible 3x3 boxes
+        """
         return [self.cross(rs, cs) for rs in rows for cs in cols]
 
     def get_all_units(self, rows, cols, boxes) -> list:
@@ -111,7 +113,13 @@ class Board:
         )
 
     def get_units(self, squares, all_units) -> dict:
+        """
+        get all units that contain each square
+
+        a unit is a row, column, or box; each unit is a tuple of 9(or more) squares
+        """
         return {s: tuple(u for u in all_units if s in u) for s in squares}
 
     def get_peers(self, squares, units) -> dict:
+        """the squares that share a unit are called peers."""
         return {s: set().union(*units[s]) - {s} for s in squares}
