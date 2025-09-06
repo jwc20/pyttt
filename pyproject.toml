@@ -14,6 +14,7 @@ dev = [
     "ruff>=0.12.12",
     "macfsevents>=0.8.4",
     "pynose>=1.5.4",
+    "pprintpp>=0.4.0",
 ]
 
 [tool.ruff]
