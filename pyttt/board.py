@@ -127,10 +127,9 @@ class Board:
     def parse(self, board_str, squares):
         """Convert a string to a Tic-Tac-Toe grid."""
         import re
-
         vals = re.findall(r"[.XOxo]", board_str)
         return {
-            s: v.upper() if v.upper() in "XO" else "." for s, v in zip(squares, vals)
+            s: v.lower() if v.lower() in "xo" else "." for s, v in zip(squares, vals)
         }
 
     def picture(self, grid, rows, cols):
