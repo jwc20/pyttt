@@ -1,4 +1,4 @@
-# ttt-py
+# pyttt
 
 building infinite Tic-Tac-Toe
 
