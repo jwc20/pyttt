@@ -92,3 +92,36 @@ class TestBoard(TestCase):
         peers = board.get_peers(squares, units)
         output = "{'2,2', '1,0', '0,2', '0,1', '1,2', '1,1', '2,0', '2,1'}"
         self.assertEqual(peers["0,0"], eval(output))
+
+
+    def test_get_board_str_from_box(self):
+        board = Board(dimension=3)
+        dim = board.get_dimension()
+        coords = board.get_coordinates_str(dim)
+        rows, cols = coords, coords
+        squares = board.cross(rows, cols)
+        coords_3 = board.get_three_by_three(coords)
+        rows_3, cols_3 = coords_3, coords_3
+        boxes = board.get_all_boxes(rows_3, cols_3)
+        box_0 = boxes[0]
+        grid = board.parse(board.board, squares)
+        output = "........."
+        self.assertEqual(board.get_board_str_from_box(box_0, grid), output)
+
+
+    def test_get_square_value(self):
+        # TODO: test square values that is not "." (e.g. "x", "o")
+        board = Board(dimension=9)
+        dim = board.get_dimension()
+        coords = board.get_coordinates_str(dim)
+        rows, cols = coords, coords
+        squares = board.cross(rows, cols)
+        # coords_3 = board.get_three_by_three(coords)
+        # rows_3, cols_3 = coords_3, coords_3
+        # boxes = board.get_all_boxes(rows_3, cols_3)
+        # box_0 = boxes[0]
+        grid = board.parse(board.board, squares)
+        # board_0_str = board.get_board_str_from_box(box_0, grid)
+        square_01 = board.get_square_value("0,1", grid)
+        self.assertEqual(square_01, ".")
+

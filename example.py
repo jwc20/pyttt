@@ -14,7 +14,7 @@ if __name__ == "__main__":
     _units = _board_str.get_units(_squares, _all_units)
     _peers = _board_str.get_peers(_squares, _units)
 
-    from pprintpp import pprint
+    # from pprintpp import pprint
 
     # pprint(_board_str)
     # pprint(_squares)
@@ -49,14 +49,22 @@ if __name__ == "__main__":
     _box_0 = _all_boxes[0]
     print(_box_0)
 
-    _r = []
+    # _r = []
+    # for s in _box_0:
+    #     _r.append(_grid[s])
+    # _box_0_str = "".join(_r)
 
-    for s in _box_0:
-        _r.append(_grid[s])
+    _box_0_str = _board_str.get_board_str_from_box(_box_0, _grid)
+    print("board string from box: ", _box_0_str)
 
-    _box_0_str = "".join(_r)
-    print(_box_0_str)
+    square_01 = _board_str.get_square_value("0,1", _grid)
+    print("square 0,1: ", square_01)
+
+    square_12 = _board_str.get_square_value("1,2", _grid)
+    print("square 1,2: ", square_12)
+
     
+
     
 
 
