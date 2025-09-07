@@ -114,27 +114,43 @@ xox xo. xo.
 - https://www.dubberly.com/concept-maps/tic-tac-toe.html
 - https://www.talkingelectronics.com/projects/TicTacToe/TicTacToe-P1.html
 - https://xkcd.com/832/
+- https://mathwithbaddrawings.com/2013/06/16/ultimate-tic-tac-toe/
+
+## tic-tac-toe variants
+
+- https://en.wikipedia.org/wiki/Tic-tac-toe_variants
 - https://www.cs.umd.edu/~gasarch/COURSES/752/S22/Combgamesttt.pdf
 - https://dhkts1.github.io/ultimate-nd-tictactoe-3d/
 - https://nrich.maths.org/articles/sprouts-explained
 - https://en.wikipedia.org/wiki/Gomoku
 - https://en.wikipedia.org/wiki/Connect6
 - http://www.geom.uiuc.edu/video/sos/materials/surfaces/tictactoe.html
+- https://ranger.uta.edu/~weems/NOTES6319/PAPERSONE/patashnik.pdf (4x4x4 ttt)
+- https://en.m.wikipedia.org/wiki/Quantum_tic-tac-toe
 
-## links
 
-- https://hn.algolia.com/?dateRange=all&page=0&prefix=false&query=tic%20tac%20toe&sort=byPopularity&type=story
-- https://en.wikipedia.org/wiki/Tic-tac-toe_variants
-- https://sasankyadati.github.io/Tic-Tac-Toe/
-- https://ranger.uta.edu/~weems/NOTES6319/PAPERSONE/patashnik.pdf
+
+## algorithms, programming ttt, etc
+
 - https://leetcode.ca/2016-11-12-348-Design-Tic-Tac-Toe/
 - https://leetcode.com/problems/find-winner-on-a-tic-tac-toe-game/description/
 - https://leetcode.com/problems/valid-tic-tac-toe-state/description/
 
 - https://lemmoscripts.com/wp/2018/09/03/creating-a-simple-tic-tac-toe-or-naughts-and-crosses-game-in-javascript-and-jquery/
 - https://andrewfischergames.com/blog/obfuscation
+- https://en.wikipedia.org/wiki/Game_complexity
+- https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation (notation for chess)
+- https://sasankyadati.github.io/Tic-Tac-Toe/ (summary of Peter Norvig & Stuart Russell - Artificial Intelligence : A
+  Modern Approach (3rd edition))
+- https://github.com/nelhage/ultimattt
 
 ## strategy
 
 - https://sasankyadati.github.io/Tic-Tac-Toe/
 - http://www.se16.info/hgb/tictactoe.htm
+
+## other links
+
+- https://hn.algolia.com/?dateRange=all&page=0&prefix=false&query=tic%20tac%20toe&sort=byPopularity&type=story
+- https://lobste.rs/search?q=tic+tac+toe&what=comments&order=newest
+- https://slashdot.org/index2.pl?fhfilter=tic+tac+toe
