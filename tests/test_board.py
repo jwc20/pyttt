@@ -31,7 +31,7 @@ class TestBoard(TestCase):
     def test_init_rows_columns_3x4(self):
         board = Board(rows=3, columns=4)
         self.assertEqual(board.board, "." * 12)
-        
+
     def test_cross(self):
         board = Board(dimension=3)
         dim = board.get_dimension()
@@ -125,3 +125,14 @@ class TestBoard(TestCase):
         square_01 = board.get_square_value("0,1", grid)
         self.assertEqual(square_01, ".")
 
+
+    def test_parse(self):
+        board = Board(dimension=3)
+        dim = board.get_dimension()
+        coords = board.get_coordinates_str(dim)
+        rows, cols = coords, coords
+        squares = board.cross(rows, cols)
+
+        grid = board.parse(board.board, squares)
+        output={'0,0': '.', '0,1': '.', '0,2': '.', '1,0': '.', '1,1': '.', '1,2': '.', '2,0': '.', '2,1': '.', '2,2': '.'}
+        self.assertEqual(grid, output)
