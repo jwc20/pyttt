@@ -26,7 +26,7 @@ class Game:
         self.turn = turn
 
         # TODO: 
-        # self.t3n: str = self.t3n()
+        self.t3n: str = self.set_t3n()
 
         # TODO: this probably dont have to be a string
         self.score_board_str: str = self._init_score_board()
@@ -89,13 +89,6 @@ class Game:
 
 
 
-
-    def set_allowed_box(self, box):
-        """set allowed box (only for ultimate tic-tac-toe)"""
-        pass
-    
-    
-    
     
     
     
@@ -111,11 +104,6 @@ class Game:
     def switch_turn_in_box(self, x, o):
         return x if self.turn == "x" else o
 
-    def place_mark_in_box(self, index):
-        """places a mark in the given box(3x3 board)"""
-        self.board_list[index] = self.turn
-        self.turn = self.switch_turn_in_box("o", "x")
-        return self
 
     def possible_moves_in_box(self):
         return [index for index, mark in enumerate(self.board_list) if mark == "."]
@@ -173,9 +161,33 @@ class Game:
     ########################################################################
     ########################################################################
 
+    # TODO: deprecate
+    def place_mark_in_box(self, index):
+        """places a mark in the given box(3x3 board)"""
+        self.board_list[index] = self.turn
+        self.turn = self.switch_turn_in_box("o", "x")
+        return self
+    
+    
     # TODO
-    def place_mark(self, player: Player, xy: str):
+    def place_mark(self, player: Player, xy: str) -> None:
         # if self.board.config["variant"] == "ultimate":
         
+        if player.mark != self.turn:
+            raise ValueError("Player mark does not match turn")
+            
         
-        return
+        self.board.place_mark(player.mark, xy)
+        self.turn = self.switch_turn_in_box("o", "x")
+        
+        self.board_list = self.board.to_list()
+        # print(self.board_list)
+        
+        print()
+        
+
+    def set_allowed_box(self, box):
+        """set allowed box (only for ultimate tic-tac-toe)"""
+        pass
+
+

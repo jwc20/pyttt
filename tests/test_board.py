@@ -138,6 +138,7 @@ class TestBoard(TestCase):
         self.assertEqual(grid, output)
 
 
+    # TODO: test for larger boxes
     def test_get_box_number_from_coordinate(self):
         board = Board(dimension=9)
     

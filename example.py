@@ -16,8 +16,6 @@ if __name__ == "__main__":
     _units = _board_str.get_units(_squares, _all_units)
     _peers = _board_str.get_peers(_squares, _units)
 
-    
-
     # pprint(_board_str)
     # pprint(_squares)
     # pprint("coords_3", _coords_3)
@@ -30,22 +28,18 @@ if __name__ == "__main__":
     # pprint(_peers["0,0"])
 
     _grid = _board_str.parse(_board_str.board_str, _squares)
-    
+
     # print(_grid)
     # print(_board_str.picture(_grid, _rows, _cols))
-
-
-
 
     # pprint(_all_boxes)
     print("\n")
     print("\n")
     print("\n")
     # pprint(_all_boxes[0])
-    
+
     # def get_box_values(box):
     #     return "".join(_grid[box])
-    
 
     # need to get box values ("x", "o", or ".") with coordinates ("0,0", "0,1", etc.)
     # returns a string of "x", "o", or ".". (example: "xoxoxoxox")
@@ -70,24 +64,14 @@ if __name__ == "__main__":
     # square_12 = _board_str.get_square_value("1,2", _grid)
     # print("square 1,2: ", square_12)
 
-    
     ###############################################
-    
-    # game = Game()
+
+    game = Game()
     # 
     # print("repr: ", game)
     # print("t3n: ", game.t3n())
 
-    game_ult = Game(Board(variant="ultimate"))
-    print("repr: ", game_ult)
-    print("\n")
-    print("t3n: ", game_ult.set_t3n())
-
-
-    
-    
-
-
-    
-    
-    
+    # game_ult = Game(Board(variant="ultimate"))
+    # print("repr: ", game_ult)
+    # print("\n")
+    # print("t3n: ", game_ult.set_t3n())

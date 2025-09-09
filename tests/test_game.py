@@ -1,5 +1,6 @@
 from unittest import TestCase
 
+from pyttt import Player
 from pyttt.game import Game
 from pyttt.board import Board
 # from pyttt.player import Player
@@ -104,3 +105,17 @@ class TestInitScoreBoard(TestCase):
     # 
     # def test_729x729(self):
     #     self.assertEqual(Game(Board(dimension=729)).init_score_board(), expected)
+    
+    
+class TestGamePlaceMark(TestCase):
+    def test_place_mark_3x3(self):
+        game = Game(Board(dimension=3))
+        game.place_mark(Player(name="player_x", mark="x"), "0,0")
+        
+        # TODO: assert
+        
+    def test_place_mark_9x9(self):
+        game = Game(Board(dimension=9))
+        game.place_mark(Player(name="player_x", mark="x"), "0,0")
+        
+        # TODO: assert

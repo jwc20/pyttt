@@ -50,6 +50,8 @@ class Board:
         self.squares = self.cross(vector_a=self._coords, vector_b=self._coords)
         self._coords_3 = self.get_three_by_three(self._coords)
         self.boxes = self.get_all_boxes(rows=self._coords_3, cols=self._coords_3)
+        
+        self.grid = self.parse(self.board_str, self.squares)
 
     def __str__(self):
         return self.board_str
@@ -272,8 +274,10 @@ class Board:
     ##################################################################
 
     # TODO
-    def place_mark(self):
-        ...
+    def place_mark(self, mark, xy):
+        self.grid[xy] = mark
+        self.board_str = "".join(self.grid.values())
+        
 
     def get_legal_move(self):
         pass
