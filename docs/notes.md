@@ -1,5 +1,16 @@
 # notes
 
+## dynamic programming, recursion
+
+- to handle the case where the board is infinite, we need to use dynamic programming and recursion
+- we need to use memoization to avoid redundant calculation
+- check 3x3 board for win condition, ... (recursion)
+
+## which class should be responsible for making moves by players?
+
+- Game class or Board class or Player class
+- Game class should be responsible for making moves by players since it has the logic for allowed moves
+- if it's in the Player or the Board class, it's not following the single responsibility principle
 
 ## for ultimate tic-tac-toe, where should the logic for allowed moves be?
 
