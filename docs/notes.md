@@ -1,27 +1,61 @@
 # notes
 
+## state machine pattern revisted
 
-## more on score string 
+- deciding against using state machine pattern for now because of complextiy it adds and tight coupling it creates
+
+```
+There are 4 states for the board:
+
+- NormalState: it's your turn and you have not placed the mark on the board
+- LockedNormalState: it's the opponent's turn and they have not placed the mark on the board
+
+- SelectedState: it's your turn and you have placed the mark on the board
+- LockedSelectedState: it's the opponent's turn and they have placed the mark on the board
+
+The board state is Locked while it is the opponents turn.
+- (it's locked when its not your turn)
+The board state is not Locked during your turn.
+
+The board state is Selected when a player has selected a position.
+- (the player has placed the mark on the board)
+The board state is not Selected when a player has not selected a position.
+
+note:
+- After selecting a position, the player must confirm their play to change turn
+- NormalState -> SelectedState -> LockedNormalState -> LockedSelectedState -> NormalState
+
+
+---
+
+Game state interface
+
+there are 4 states:
+
+- setup
+- ready
+- playing
+- ended
+
+```
+
+## more on score string
 
 - we can use a string to represent the score of a box
 
 example:
+
 - classic tic-tac-toe -> no score string
 - ultimate tic-tac-toe (9x9 board)
-  - score string: "x..x..xo."
+    - score string: "x..x..xo."
 - for larger ultimate tic-tac-toe (27x27 board), we need multiple score strings separated by semicolon
-  - "x...x...o;xxx....../........./........./........./..x.x.x../........./........./........./..o..o..o"
-
+    - "x...x...o;xxx....../........./........./........./..x.x.x../........./........./........./..o..o..o"
 
 ![CleanShot 2025-09-09 at 14 29 55@2x](https://github.com/user-attachments/assets/90a656bf-54f1-49c1-ad22-59d8f334657e)
-
-
-
 
 ## future consideration: design patterns for win conditions for other variants ttt
 
 - might want to use strategy pattern
-
 
 ## should i use a class for the square?
 
@@ -43,12 +77,11 @@ class Square:
 
 - check 3x3 board (box, classic tic-tac-toe) for win condition, ... (recursion)
 - we keep a score string to represent if the box is won
-  - example:
-    - if at top-left box (`boxes[0]`), we have "xxx......" (the box is won by x) 
-    - then the board string should be "x........"
+    - example:
+        - if at top-left box (`boxes[0]`), we have "xxx......" (the box is won by x)
+        - then the board string should be "x........"
 
 ![CleanShot 2025-09-09 at 13 51 03@2x](https://github.com/user-attachments/assets/ac3e2b4e-fde9-4a00-8cd1-3cbe1add28c0)
-
 
 string format:
 
@@ -65,34 +98,34 @@ string format:
 - either in the Game class or the Board class
 - it should be in the Game class since the Board class is a data structure and Game class is the one that has the logic
 
-
 ## Player object - where should it be (dependency) injected?
 
 - it could be injected into either the Game class or the Board class
-- in the [bncpy library](https://github.com/jwc20/bncpy) the Player object was injected into the Board class, because in one game, each players should have their own board
+- in the [bncpy library](https://github.com/jwc20/bncpy) the Player object was injected into the Board class, because in
+  one game, each players should have their own board
 - in pyttt, it might be better to have Player in the Game class since each players don't need their own board
 
 ```python
 # example
 def main():
-  players = [Player("player_1"), Player("player_2")]
-  board = Board(...)
-  game = Game(board, players)
+    players = [Player("player_1"), Player("player_2")]
+    board = Board(...)
+    game = Game(board, players)
 ```
-
 
 ## memoization/caching
 
 - memoization variable `cache` is used in the minimax method in the Game class.
-  - this is used to avoid redundant calculation that it's going
-  - we are using the `__repr__()` as key
-  - we are using `.get()` method (as opposed to using `cache[key]`) to aboid key errors (since the initial cache dictionary is empty)
+    - this is used to avoid redundant calculation that it's going
+    - we are using the `__repr__()` as key
+    - we are using `.get()` method (as opposed to using `cache[key]`) to aboid key errors (since the initial cache
+      dictionary is empty)
 
 ## tic-tac-toe board notation
 
 - taking influence from FEN notation from chess and from [ultimattt](https://github.com/nelhage/ultimattt)
 
-  - `O;@........;X.OO...../X..X.O.O./X.X...O.O/.X.OXO.../O.O.X..../.XX....O./......X.O/.O.X.X.../.O.....XX`
+    - `O;@........;X.OO...../X..X.O.O./X.X...O.O/.X.OXO.../O.O.X..../.XX....O./......X.O/.O.X.X.../.O.....XX`
 
 - note that the notation needs to be updated for larger boards
 
@@ -121,8 +154,8 @@ board_str = "xoxoxoxox x..x..xo. x..x..xo. ooooooooo x..x..xo. x..x..xo. xoxoxox
 ## abc vs protocol
 
 - narrow protocols are more useful (Fluent Python p.476)
-  - narrow protocols have a single method
-  - we also dont have to use a decorator in a protocol
+    - narrow protocols have a single method
+    - we also dont have to use a decorator in a protocol
 
 ```
 ...sometimes you see a protocol defined near the function that uses it—that is,
@@ -141,27 +174,27 @@ rize as “Clients should not be forced to depend upon interfaces that they do n
 
 - Game
 - Board
-  - factory method pattern(?)
-  - linked list for history
+    - factory method pattern(?)
+    - linked list for history
 - Player
 - BoardState
-  - State machine pattern
+    - State machine pattern
 - GameState
-  - State machine pattern
+    - State machine pattern
 - utils.py
 
 ## array(list) vs string
 
 - we can store pieces(x's and o's) in an array and reference them using an array index
 
-  - arr = [[".", ".", "x"],[".", ".", "x"],[".", ".", "x"]] => arr[0][2] = "x"
-  - the issue is that passing around the array bunch of times can use lot of resource.
-  - also there are risks of array being altered accidentally because arrays are passed between functions by reference.
+    - arr = [[".", ".", "x"],[".", ".", "x"],[".", ".", "x"]] => arr[0][2] = "x"
+    - the issue is that passing around the array bunch of times can use lot of resource.
+    - also there are risks of array being altered accidentally because arrays are passed between functions by reference.
 
 - string manipulation is optimized in Python
 - since strings are immutable, we need to pass around copy of the string with the cost of speed but with less risk of
   string being altered when passed between functions(like arrays)
-  - using immutable data types prevents using `deepcopy()` and deep copying is slow and use up memory
+    - using immutable data types prevents using `deepcopy()` and deep copying is slow and use up memory
 
 ### string manipulation and getting position
 
@@ -196,11 +229,11 @@ xox xo. xo.
 
 - multi-dimensional arrays are slow and uses lot of memory so we should instead use 1d-array (a block of memory)
 - calculate the index of the 1d-array from the matrix row and column
-  - (e.g. row \* width + col)
+    - (e.g. row \* width + col)
 - matrix multiplication requires going through rows and the columns of the matrix
-  - (prob have to use cross product to determine positions of the squares in the board using the board string ("
-    x..x..xo."))
-  - must consider recursion for infinite fractal board
+    - (prob have to use cross product to determine positions of the squares in the board using the board string ("
+      x..x..xo."))
+    - must consider recursion for infinite fractal board
 
 ---
 
