@@ -4,7 +4,16 @@
 
 - to handle the case where the board is infinite, we need to use dynamic programming and recursion
 - we need to use memoization to avoid redundant calculation
-- check 3x3 board for win condition, ... (recursion)
+
+- check 3x3 board (box, classic tic-tac-toe) for win condition, ... (recursion)
+- we keep a score string to represent if the box is won
+  - example:
+    - if at top-left box (`boxes[0]`), we have "xxx......" (the box is won by x) 
+    - then the board string should be "x........" 
+
+string format:
+
+- a 3x3 board has a t3n (tic-tac-toe notation) of "o;xoxoxoxox"
 
 ## which class should be responsible for making moves by players?
 
