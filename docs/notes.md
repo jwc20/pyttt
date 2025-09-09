@@ -1,5 +1,13 @@
 # notes
 
+
+## memoization/caching
+
+- memoization variable `cache` is used in the minimax method in the Game class.
+  - this is used to avoid redundant calculation that it's going
+  - we are using the `__repr__()` as key
+  - we are using `.get()` method (as opposed to using `cache[key]`) to aboid key errors (since the initial cache dictionary is empty)
+
 ## tic-tac-toe board notation
 
 - taking influence from FEN notation from chess and from [ultimattt](https://github.com/nelhage/ultimattt)

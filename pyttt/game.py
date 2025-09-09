@@ -5,8 +5,6 @@ SIZE = DIM * DIM
 
 
 class Game:
-    cache = {}
-
     def __init__(self, board: str = "." * SIZE, turn: str = "x") -> None:
         self.board = list(board)
         # self.players = players
@@ -39,6 +37,9 @@ class Game:
         min_diag = is_match(self.board[DIM - 1: SIZE - 1: DIM - 1])
         return any(rows) or any(cols) or maj_diag or min_diag
 
+    # this cache variable memoize  
+    # note: this should not be encapsulated since it makes it slower
+    cache = {}
     def minimax(self):
         key = repr(self)
         value = self.cache.get(key)
