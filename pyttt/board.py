@@ -174,3 +174,7 @@ class Board:
     def get_square_value(self, xy, grid):
         """get square value from coordinates"""
         return grid[xy]
+
+    # TODO
+    def place_piece(self):
+        ...
