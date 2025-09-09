@@ -19,6 +19,10 @@ class Game:
         self.players = players
         self.turn = turn
         
+        # TODO: 
+        # self.t3n: str = self.t3n()
+        # self.score_board_str: str = None
+        
     def t3n(self):
         """
         tic-tac-toe game notation
@@ -34,15 +38,25 @@ class Game:
         """
         _turn = repr(self.turn)
         _allowed_box = None
-        _board = str(self.board)
+        
+        _partitioned_board = []
+        for i in range(0, len(self.board_list), self.board.get_dimension()):
+            _partitioned_board.append(self.board_list[i: i + self.board.get_dimension()])
+            _partitioned_board.append("/")
+            
+        _board = [] 
+        for row in _partitioned_board:
+            _board += row
+
+        _board_str = "".join(_board)
         
         
         if self.board.config["variant"] == "ultimate":
             # TODO
             _allowed_box = "........."
             
-            return "%s;%s;%s" % (_turn, _allowed_box, _board)
-        return "%s;%s" % (_turn, _board)
+            return "%s;%s;%s" % (_turn, _allowed_box, _board_str)
+        return "%s;%s" % (_turn, _board_str)
     
     
 
