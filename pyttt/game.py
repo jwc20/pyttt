@@ -8,8 +8,13 @@ SIZE = DIM * DIM
 
 
 class Game:
-    def __init__(self, board: Board | str = "." * SIZE, turn: str = "x", players: list[Player] = []) -> None:
-        self.board = list(board)
+    def __init__(self, board: Board | str | None = None, turn: str = "x", players: list[Player] = []) -> None:
+        self.board: Board = board
+        if board is None:
+            self.board = Board()
+        if board is not None and isinstance(board, str):
+            self.board = Board(board_str=board)
+        self.board_list = self.board.to_list()
         self.players = players
         self.turn = turn
         
@@ -26,45 +31,34 @@ class Game:
             - ultimate tic-tac-toe:
                 - "O;@........;X.OO...../X..X.O.O./X.X...O.O/.X.OXO.../O.O.X..../.XX....O./......X.O/.O.X.X.../.O.....XX" (example from ultimattt)
         """
-        
-    def allowed_box(self):
-        """
-        This is only for ultimate tic-tac-toe
-        
-        returns the allowed box to place piece
-        """
-        if self.is_game_end():
-            return None
-        if self.board.count(".") == 9 and self.turn == "x" and not self.board.prev:
-            return "." * 9 
-        return
+
         
 
     def __repr__(self):
-        return "(%s, %s)" % (repr("".join(self.board)), repr(self.turn))
+        return "(%s, %s)" % (repr("".join(self.board_list)), repr(self.turn))
 
     def __eq__(self, other):
-        return self.board == other.board and self.turn == other.turn
+        return self.board_list == other.board_list and self.turn == other.turn
 
     def choose(self, x, o):
         return x if self.turn == "x" else o
 
     def move(self, index):
-        self.board[index] = self.turn
+        self.board_list[index] = self.turn
         self.turn = self.choose("o", "x")
         return self
 
     def possible_moves(self):
-        return [index for index, piece in enumerate(self.board) if piece == "."]
+        return [index for index, piece in enumerate(self.board_list) if piece == "."]
 
     def is_win_for(self, piece):
         """checks 3x3 board if the given piece has won"""
         is_match = lambda line: line.count(piece) == DIM
         
-        rows = [is_match(self.board[i: i + DIM]) for i in range(0, SIZE, DIM)]
-        cols = [is_match(self.board[i:SIZE:DIM]) for i in range(0, DIM)]
-        maj_diag = is_match(self.board[0: SIZE: DIM + 1])
-        min_diag = is_match(self.board[DIM - 1: SIZE - 1: DIM - 1])
+        rows = [is_match(self.board_list[i: i + DIM]) for i in range(0, SIZE, DIM)]
+        cols = [is_match(self.board_list[i:SIZE:DIM]) for i in range(0, DIM)]
+        maj_diag = is_match(self.board_list[0: SIZE: DIM + 1])
+        min_diag = is_match(self.board_list[DIM - 1: SIZE - 1: DIM - 1])
         return any(rows) or any(cols) or maj_diag or min_diag
 
     # this cache variable memoize  
@@ -77,10 +71,10 @@ class Game:
             # if the value is 0, then the value is considered False. so we need to check if it's None.
             return value
         if self.is_win_for("x"):
-            return self.board.count(".")
+            return self.board_list.count(".")
         if self.is_win_for("o"):
-            return -self.board.count(".")
-        if self.board.count(".") == 0:
+            return -self.board_list.count(".")
+        if self.board_list.count(".") == 0:
             return 0
 
         # TODO: find a way not to use deepcopy()
@@ -100,5 +94,5 @@ class Game:
 
     def is_game_end(self):
         return (
-                self.is_win_for("x") or self.is_win_for("o") or self.board.count(".") == 0
+                self.is_win_for("x") or self.is_win_for("o") or self.board_list.count(".") == 0
         )

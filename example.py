@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # pprint(_units["0,0"])
     # pprint(_peers["0,0"])
 
-    _grid = _board_str.parse(_board_str.board, _squares)
+    _grid = _board_str.parse(_board_str.board_str, _squares)
     
     # print(_grid)
     # print(_board_str.picture(_grid, _rows, _cols))

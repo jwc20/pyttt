@@ -22,6 +22,7 @@ class Board:
         dimension: int | None = None,
         rows: int | None = None,
         columns: int | None = None,
+        board_str: str | None = None,
     ) -> None:
         self._config = {
             "variant": variant,
@@ -34,7 +35,11 @@ class Board:
         self.prev = None
         self._history_moves = []
 
-        self.board = self._init_board() # board string
+        self.board_str = board_str
+        # self.board = None
+        if board_str is None:
+            self.board_str = self._init_board() # board string
+        
 
         # TODO: implement state
         # self._state: BoardState = NormalState(self)
@@ -75,18 +80,18 @@ class Board:
         pass
 
     # TODO
-    def __repr__(self):
-        """
-        returns string like "xxxxxxxxxx..x..xo.x..x..xo.ooooooooox..x..xo.x..x..xo.xoxoxoxoxx..x..xo.x..x..xo."
-        """
-        return self.board
+    # def __repr__(self):
+    #     """
+    #     returns string like "xxxxxxxxxx..x..xo.x..x..xo.ooooooooox..x..xo.x..x..xo.xoxoxoxoxx..x..xo.x..x..xo."
+    #     """
+    #     return self.board_str
 
     # TODO
     def __eq__(self, other):
         pass
 
     def get_dimension(self) -> int:
-        return int(len(self.board) ** (1 / 2))
+        return int(len(self.board_str) ** (1 / 2))
 
     def get_coordinates_str(self, dim: int) -> str:
         return "".join([str(i) for i in range(dim)])
@@ -174,6 +179,9 @@ class Board:
     def get_square_value(self, xy, grid):
         """get square value from coordinates"""
         return grid[xy]
+
+    def to_list(self):
+        return list(self.board_str)
 
     # TODO
     def place_piece(self):

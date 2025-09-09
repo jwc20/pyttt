@@ -8,12 +8,12 @@ from pyttt.game import Game
 class TestGame(TestCase):
     def test_init(self):
         game = Game()
-        self.assertEqual(game.board, list("." * 9))
+        self.assertEqual(game.board_list, list("." * 9))
         self.assertEqual(game.turn, "x")
 
     def test_init_with_args(self):
         game = Game("x........", "o")
-        self.assertEqual(game.board, list("x........"))
+        self.assertEqual(game.board_list, list("x........"))
         self.assertEqual(game.turn, "o")
 
     def test_eq(self):

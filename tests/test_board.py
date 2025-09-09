@@ -6,31 +6,31 @@ from pyttt.board import Board
 class TestBoard(TestCase):
     def test_init_no_params(self):
         board = Board()
-        self.assertEqual(board.board, "." * 9)
+        self.assertEqual(board.board_str, "." * 9)
 
     def test_init_variant_classic(self):
         board = Board(variant="classic")
-        self.assertEqual(board.board, "." * 9)
+        self.assertEqual(board.board_str, "." * 9)
         
     def test_init_variant_ultimate(self):
         board = Board(variant="ultimate")
-        self.assertEqual(board.board, "." * 81)
+        self.assertEqual(board.board_str, "." * 81)
 
     def test_init_dimension_3x3(self):
         board = Board(dimension=3)
-        self.assertEqual(board.board, "." * 9)
+        self.assertEqual(board.board_str, "." * 9)
         
     def test_init_dimension_9x9(self):
         board = Board(dimension=9)
-        self.assertEqual(board.board, "." * 81)
+        self.assertEqual(board.board_str, "." * 81)
 
     def test_init_rows_columns_3x3(self):
         board = Board(rows=3, columns=3)
-        self.assertEqual(board.board, "." * 9)
+        self.assertEqual(board.board_str, "." * 9)
 
     def test_init_rows_columns_3x4(self):
         board = Board(rows=3, columns=4)
-        self.assertEqual(board.board, "." * 12)
+        self.assertEqual(board.board_str, "." * 12)
 
     def test_cross(self):
         board = Board(dimension=3)
@@ -104,7 +104,7 @@ class TestBoard(TestCase):
         rows_3, cols_3 = coords_3, coords_3
         boxes = board.get_all_boxes(rows_3, cols_3)
         box_0 = boxes[0]
-        grid = board.parse(board.board, squares)
+        grid = board.parse(board.board_str, squares)
         output = "........."
         self.assertEqual(board.get_board_str_from_box(box_0, grid), output)
 
@@ -120,7 +120,7 @@ class TestBoard(TestCase):
         # rows_3, cols_3 = coords_3, coords_3
         # boxes = board.get_all_boxes(rows_3, cols_3)
         # box_0 = boxes[0]
-        grid = board.parse(board.board, squares)
+        grid = board.parse(board.board_str, squares)
         # board_0_str = board.get_board_str_from_box(box_0, grid)
         square_01 = board.get_square_value("0,1", grid)
         self.assertEqual(square_01, ".")
@@ -133,6 +133,6 @@ class TestBoard(TestCase):
         rows, cols = coords, coords
         squares = board.cross(rows, cols)
 
-        grid = board.parse(board.board, squares)
+        grid = board.parse(board.board_str, squares)
         output={'0,0': '.', '0,1': '.', '0,2': '.', '1,0': '.', '1,1': '.', '1,2': '.', '2,0': '.', '2,1': '.', '2,2': '.'}
         self.assertEqual(grid, output)
