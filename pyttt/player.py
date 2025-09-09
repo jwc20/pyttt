@@ -1,12 +1,19 @@
+from pyttt import Board
+
 class Player:
-    def __init__(self, name:str, piece: str) -> None:
+    def __init__(self, name:str, mark: str) -> None:
         self._name = name
-        self._piece = piece
+        self._mark = mark
         
     @property
     def name(self):
         return self._name
     
     @property
-    def piece(self):
-        return self._piece
+    def mark(self):
+        return self._mark
+    
+    def place_mark(self, board: Board, index: int):
+        pass
+    
+    

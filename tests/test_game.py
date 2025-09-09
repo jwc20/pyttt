@@ -20,10 +20,10 @@ class TestGame(TestCase):
         self.assertEqual(Game(), Game())
 
     def test_move(self):
-        self.assertEqual(Game().move(1), Game(".x.......", "o"))
+        self.assertEqual(Game().place_mark_in_box(1), Game(".x.......", "o"))
 
     def test_possible_moves(self):
-        self.assertEqual(Game().move(1).possible_moves(), [0, 2, 3, 4, 5, 6, 7, 8])
+        self.assertEqual(Game().place_mark_in_box(1).possible_moves(), [0, 2, 3, 4, 5, 6, 7, 8])
 
 
 class TestIsWinFor(TestCase):

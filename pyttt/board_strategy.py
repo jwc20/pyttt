@@ -25,7 +25,7 @@ class VariantStrategy:
     """
     note that ultimate tic-tac-toe is different from a 9x9 tic-tac-toe
         - different rules to win
-        - the position where you place your piece determines which small board(3x3 grid, box) your opponent must play in next.
+        - the position where you place your mark determines which small board(3x3 grid, box) your opponent must play in next.
     """
     config: dict
 
@@ -45,6 +45,7 @@ class DimensionStrategy:
         return "." * (self.config["dimension"] * self.config["dimension"])
 
 
+# note: probably not needed
 @dataclass
 class RowsColumnsStrategy:
     config: dict

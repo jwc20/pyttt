@@ -5,11 +5,11 @@ from typing import Protocol
 class BoardState(Protocol):
     """
     There are 4 states for the board:
-    - NormalState: it's your turn and you have not placed the piece on the board
-    - LockedNormalState: it's the opponent's turn and they have not placed the piece on the board
+    - NormalState: it's your turn and you have not placed the mark on the board
+    - LockedNormalState: it's the opponent's turn and they have not placed the mark on the board
     
-    - SelectedState: it's your turn and you have placed the piece on the board
-    - LockedSelectedState: it's the opponent's turn and they have placed the piece on the board
+    - SelectedState: it's your turn and you have placed the mark on the board
+    - LockedSelectedState: it's the opponent's turn and they have placed the mark on the board
     
     
     The board state is Locked while it is the opponents turn.
@@ -18,7 +18,7 @@ class BoardState(Protocol):
     
     
     The board state is Selected when a player has selected a position. 
-        - (the player has placed the piece on the board) 
+        - (the player has placed the mark on the board) 
     The board state is not Selected when a player has not selected a position.
     
     

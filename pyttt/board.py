@@ -1,5 +1,8 @@
 from pyttt.board_strategy import DimensionStrategy, RowsColumnsStrategy, VariantStrategy
 
+from pyttt.square import Square
+
+# Square = namedtuple("Square", ("x", "y"))
 
 class Board:
     """
@@ -33,16 +36,26 @@ class Board:
 
         self.next = None
         self.prev = None
-        self._history_moves = []
+        self.mark_history = []
 
         self.board_str = board_str
         # self.board = None
         if board_str is None:
             self.board_str = self._init_board() # board string
         
+        # self._squares = [Square(x, y) for x in range(self.get_dimension()) for y in range(self.get_dimension())]
+        # print(self._squares)
 
         # TODO: implement state
         # self._state: BoardState = NormalState(self)
+        
+    
+    def __str__(self):
+        return self.board_str
+
+    @property
+    def config(self) -> dict:
+        return self._config
 
     def _init_board(self) -> str | None:
         """
@@ -51,29 +64,35 @@ class Board:
             - dimension (width of matrix)
             - rows and columns
         """
+        
+        board_str = ""
+        
         if self._config["variant"] and (
             self._config["dimension"] is None
             and (self._config["rows"] is None and self._config["columns"] is None)
         ):
-            return VariantStrategy(self._config).create_board()
+            board_str = VariantStrategy(self._config).create_board()
 
         if self._config["dimension"] and (
             self._config["variant"] is None
             and (self._config["rows"] is None and self._config["columns"] is None)
         ):
-            return DimensionStrategy(self._config).create_board()
+             board_str = DimensionStrategy(self._config).create_board()
 
         if (self._config["rows"] and self._config["columns"]) and (
             self._config["variant"] is None and self._config["dimension"] is None
         ):
-            return RowsColumnsStrategy(self._config).create_board()
+            board_str = RowsColumnsStrategy(self._config).create_board()
 
         if not (
             self._config["variant"]
             or self._config["dimension"]
             or (self._config["rows"] and self._config["columns"])
         ):
-            return "." * 9 # classic ttt
+            board_str = "." * 9 # classic ttt
+            
+        
+        return board_str
 
     # TODO
     def set_state(self):
@@ -110,6 +129,24 @@ class Board:
     def get_all_boxes(self, rows, cols) -> list:
         """
         get all possible 3x3 boxes
+        :param rows: 
+        :param cols: 
+        :return: list of 3x3 boxes
+        
+        :example:
+            - rows = ('012', '345', '678')
+            - cols = ('012', '345', '678')
+            - return = [
+                        ('0,0', '0,1', '0,2', '1,0', '1,1', '1,2', '2,0', '2,1', '2,2'),
+                        ('0,3', '0,4', '0,5', '1,3', '1,4', '1,5', '2,3', '2,4', '2,5'),
+                        ('0,6', '0,7', '0,8', '1,6', '1,7', '1,8', '2,6', '2,7', '2,8'),
+                        ('3,0', '3,1', '3,2', '4,0', '4,1', '4,2', '5,0', '5,1', '5,2'),
+                        ('3,3', '3,4', '3,5', '4,3', '4,4', '4,5', '5,3', '5,4', '5,5'),
+                        ('3,6', '3,7', '3,8', '4,6', '4,7', '4,8', '5,6', '5,7', '5,8'),
+                        ('6,0', '6,1', '6,2', '7,0', '7,1', '7,2', '8,0', '8,1', '8,2'),
+                        ('6,3', '6,4', '6,5', '7,3', '7,4', '7,5', '8,3', '8,4', '8,5'),
+                        ('6,6', '6,7', '6,8', '7,6', '7,7', '7,8', '8,6', '8,7', '8,8'),
+                        ]
         """
         return [self.cross(rs, cs) for rs in rows for cs in cols]
 
@@ -168,7 +205,17 @@ class Board:
         return "\n".join(result)
 
     def get_board_str_from_box(self, box, grid):
-        """get board string from box"""
+        """
+        get board string from box
+        :param box: 
+        :param grid: 
+        :return: string
+        
+        :example:
+            - box = ('0,0', '0,1', '0,2', '1,0', '1,1', '1,2', '2,0', '2,1', '2,2')
+            - grid = {'0,0': '.', '0,1': '.', '0,2': '.', '0,3': '.', '0,4': '.', '0,5': '.', '0,6': '.', '0,7': '.', '0,8': '.', '1,0': '.', '1,1': '.', '1,2': '.', '1,3': '.', '1,4': '.', '1,5': '.', '1,6': '.', '1,7': '.', '1,8': '.', '2,0': '.', '2,1': '.', '2,2': '.', '2,3': '.', '2,4': '.', '2,5': '.', '2,6': '.', '2,7': '.', '2,8': '.', '3,0': '.', '3,1': '.', '3,2': '.', '3,3': '.', '3,4': '.', '3,5': '.', '3,6': '.', '3,7': '.', '3,8': '.', '4,0': '.', '4,1': '.', '4,2': '.', '4,3': '.', '4,4': '.', '4,5': '.', '4,6': '.', '4,7': '.', '4,8': '.', '5,0': '.', '5,1': '.', '5,2': '.', '5,3': '.', '5,4': '.', '5,5': '.', '5,6': '.', '5,7': '.', '5,8': '.', '6,0': '.', '6,1': '.', '6,2': '.', '6,3': '.', '6,4': '.', '6,5': '.', '6,6': '.', '6,7': '.', '6,8': '.', '7,0': '.', '7,1': '.', '7,2': '.', '7,3': '.', '7,4': '.', '7,5': '.', '7,6': '.', '7,7': '.', '7,8': '.', '8,0': '.', '8,1': '.', '8,2': '.', '8,3': '.', '8,4': '.', '8,5': '.', '8,6': '.', '8,7': '.', '8,8': '.'}
+            - return = "........."
+        """
         result = []
         for xy in box:
             # xy is str coordinates like "0,0"
@@ -184,5 +231,18 @@ class Board:
         return list(self.board_str)
 
     # TODO
-    def place_piece(self):
+    def place_mark(self):
         ...
+    
+    def get_legal_move(self):
+        pass
+    
+    def get_allowed_boxes(self):
+        """for ultimate tic-tac-toe"""
+        if self.config is None or self.config["variant"] != "ultimate" or len(self.board_str) != 81:
+            return ""
+        
+        # allowed_boxes = ""
+        
+        
+        return 

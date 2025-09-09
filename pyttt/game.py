@@ -14,6 +14,7 @@ class Game:
             self.board = Board()
         if board is not None and isinstance(board, str):
             self.board = Board(board_str=board)
+            
         self.board_list = self.board.to_list()
         self.players = players
         self.turn = turn
@@ -24,15 +25,26 @@ class Game:
         
         components:
             - current player's turn
-            - allowed box to place piece
+            - allowed box to place mark
             - board string
             
         example:
             - ultimate tic-tac-toe:
                 - "O;@........;X.OO...../X..X.O.O./X.X...O.O/.X.OXO.../O.O.X..../.XX....O./......X.O/.O.X.X.../.O.....XX" (example from ultimattt)
         """
-
+        _turn = repr(self.turn)
+        _allowed_box = None
+        _board = str(self.board)
         
+        
+        if self.board.config["variant"] == "ultimate":
+            # TODO
+            _allowed_box = "........."
+            
+            return "%s;%s;%s" % (_turn, _allowed_box, _board)
+        return "%s;%s" % (_turn, _board)
+    
+    
 
     def __repr__(self):
         return "(%s, %s)" % (repr("".join(self.board_list)), repr(self.turn))
@@ -40,20 +52,23 @@ class Game:
     def __eq__(self, other):
         return self.board_list == other.board_list and self.turn == other.turn
 
-    def choose(self, x, o):
+    def switch_turn(self, x, o):
         return x if self.turn == "x" else o
+    
+    
 
-    def move(self, index):
+    def place_mark_in_box(self, index):
+        """places a mark in the given box(3x3 board)"""
         self.board_list[index] = self.turn
-        self.turn = self.choose("o", "x")
+        self.turn = self.switch_turn("o", "x")
         return self
 
     def possible_moves(self):
-        return [index for index, piece in enumerate(self.board_list) if piece == "."]
+        return [index for index, mark in enumerate(self.board_list) if mark == "."]
 
-    def is_win_for(self, piece):
-        """checks 3x3 board if the given piece has won"""
-        is_match = lambda line: line.count(piece) == DIM
+    def is_win_for(self, mark):
+        """checks 3x3 board if the given mark has won"""
+        is_match = lambda line: line.count(mark) == DIM
         
         rows = [is_match(self.board_list[i: i + DIM]) for i in range(0, SIZE, DIM)]
         cols = [is_match(self.board_list[i:SIZE:DIM]) for i in range(0, DIM)]
@@ -79,17 +94,17 @@ class Game:
 
         # TODO: find a way not to use deepcopy()
         values = [
-            deepcopy(self).move(index).minimax() for index in self.possible_moves()
+            deepcopy(self).place_mark_in_box(index).minimax() for index in self.possible_moves()
         ]
-        value = self.choose(max, min)(values)
+        value = self.switch_turn(max, min)(values)
         self.cache[key] = value
         return value
 
     def best_move(self):
-        fn = self.choose(max, min)
+        fn = self.switch_turn(max, min)
         return fn(
             self.possible_moves(),
-            key=lambda index: deepcopy(self).move(index).minimax(),
+            key=lambda index: deepcopy(self).place_mark_in_box(index).minimax(),
         )
 
     def is_game_end(self):
