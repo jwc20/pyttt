@@ -1,5 +1,12 @@
 # notes
 
+
+## for ultimate tic-tac-toe, where should the logic for allowed moves be?
+
+- either in the Game class or the Board class
+- it should be in the Game class since the Board class is a data structure and Game class is the one that has the logic
+
+
 ## Player object - where should it be (dependency) injected?
 
 - it could be injected into either the Game class or the Board class
