@@ -1,6 +1,7 @@
-from pyttt import Board
-
 class Player:
+    """
+    this class exists to distinguish between players and set the mark ("x" or "o")
+    """
     def __init__(self, name:str, mark: str) -> None:
         self._name = name
         self._mark = mark
@@ -12,8 +13,4 @@ class Player:
     @property
     def mark(self):
         return self._mark
-    
-    def place_mark(self, board: Board, index: int):
-        pass
-    
     
