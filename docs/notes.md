@@ -9,7 +9,10 @@
 - we keep a score string to represent if the box is won
   - example:
     - if at top-left box (`boxes[0]`), we have "xxx......" (the box is won by x) 
-    - then the board string should be "x........" 
+    - then the board string should be "x........"
+
+![CleanShot 2025-09-09 at 13 51 03@2x](https://github.com/user-attachments/assets/ac3e2b4e-fde9-4a00-8cd1-3cbe1add28c0)
+
 
 string format:
 
