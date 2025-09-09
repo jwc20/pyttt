@@ -55,7 +55,6 @@ class Game:
     def switch_turn(self, x, o):
         return x if self.turn == "x" else o
     
-    
 
     def place_mark_in_box(self, index):
         """places a mark in the given box(3x3 board)"""
@@ -63,10 +62,10 @@ class Game:
         self.turn = self.switch_turn("o", "x")
         return self
 
-    def possible_moves(self):
+    def possible_moves_in_box(self):
         return [index for index, mark in enumerate(self.board_list) if mark == "."]
 
-    def is_win_for(self, mark):
+    def check_win_in_box(self, mark):
         """checks 3x3 board if the given mark has won"""
         is_match = lambda line: line.count(mark) == DIM
         
@@ -85,16 +84,16 @@ class Game:
         if value is not None:
             # if the value is 0, then the value is considered False. so we need to check if it's None.
             return value
-        if self.is_win_for("x"):
+        if self.check_win_in_box("x"):
             return self.board_list.count(".")
-        if self.is_win_for("o"):
+        if self.check_win_in_box("o"):
             return -self.board_list.count(".")
         if self.board_list.count(".") == 0:
             return 0
 
         # TODO: find a way not to use deepcopy()
         values = [
-            deepcopy(self).place_mark_in_box(index).minimax() for index in self.possible_moves()
+            deepcopy(self).place_mark_in_box(index).minimax() for index in self.possible_moves_in_box()
         ]
         value = self.switch_turn(max, min)(values)
         self.cache[key] = value
@@ -103,11 +102,11 @@ class Game:
     def best_move(self):
         fn = self.switch_turn(max, min)
         return fn(
-            self.possible_moves(),
+            self.possible_moves_in_box(),
             key=lambda index: deepcopy(self).place_mark_in_box(index).minimax(),
         )
 
     def is_game_end(self):
         return (
-                self.is_win_for("x") or self.is_win_for("o") or self.board_list.count(".") == 0
+                self.check_win_in_box("x") or self.check_win_in_box("o") or self.board_list.count(".") == 0
         )

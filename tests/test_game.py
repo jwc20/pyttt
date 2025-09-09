@@ -23,24 +23,25 @@ class TestGame(TestCase):
         self.assertEqual(Game().place_mark_in_box(1), Game(".x.......", "o"))
 
     def test_possible_moves(self):
-        self.assertEqual(Game().place_mark_in_box(1).possible_moves(), [0, 2, 3, 4, 5, 6, 7, 8])
+        # print("\npossible moves:",Game().place_mark_in_box(1).possible_moves())
+        self.assertEqual(Game().place_mark_in_box(1).possible_moves_in_box(), [0, 2, 3, 4, 5, 6, 7, 8])
 
 
 class TestIsWinFor(TestCase):
     def test_no_win(self):
-        self.assertFalse(Game().is_win_for("x"))
+        self.assertFalse(Game().check_win_in_box("x"))
 
     def test_row(self):
-        self.assertTrue(Game("xxx......").is_win_for("x"))
+        self.assertTrue(Game("xxx......").check_win_in_box("x"))
 
     def test_col(self):
-        self.assertTrue(Game("o..o..o..").is_win_for("o"))
+        self.assertTrue(Game("o..o..o..").check_win_in_box("o"))
 
     def test_major_diagonal(self):
-        self.assertTrue(Game("x...x...x").is_win_for("x"))
+        self.assertTrue(Game("x...x...x").check_win_in_box("x"))
 
     def test_minor_diagonal(self):
-        self.assertTrue(Game("..x.x.x..").is_win_for("x"))
+        self.assertTrue(Game("..x.x.x..").check_win_in_box("x"))
 
 
 class TestMinimax(TestCase):
