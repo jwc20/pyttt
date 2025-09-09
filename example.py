@@ -22,7 +22,7 @@ if __name__ == "__main__":
     # pprint(_squares)
     # pprint("coords_3", _coords_3)
     # pprint(_coords_3)
-    # pprint(_all_boxes)
+    pprint(_all_boxes)
     # pprint(_all_units)
     # pprint(_units)
     # pprint(_peers)
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     game_ult = Game(Board(variant="ultimate"))
     print("repr: ", game_ult)
     print("\n")
-    print("t3n: ", game_ult.t3n())
+    print("t3n: ", game_ult.set_t3n())
 
 
     
