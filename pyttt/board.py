@@ -34,7 +34,7 @@ class Board:
         self.prev = None
         self._history_moves = []
 
-        self.board = self._init_board()
+        self.board = self._init_board() # board string
 
         # TODO: implement state
         # self._state: BoardState = NormalState(self)
@@ -68,7 +68,7 @@ class Board:
             or self._config["dimension"]
             or (self._config["rows"] and self._config["columns"])
         ):
-            return "." * 9
+            return "." * 9 # classic ttt
 
     # TODO
     def set_state(self):
@@ -76,6 +76,9 @@ class Board:
 
     # TODO
     def __repr__(self):
+        """
+        returns string like "xxxxxxxxxx..x..xo.x..x..xo.ooooooooox..x..xo.x..x..xo.xoxoxoxoxx..x..xo.x..x..xo."
+        """
         return self.board
 
     # TODO
