@@ -1,5 +1,24 @@
 # notes
 
+
+## future consideration: design patterns for win conditions for other variants ttt
+
+- might want to use strategy pattern
+
+
+## should i use a class for the square?
+
+example:
+
+```python
+class Square:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+```
+
+- prob not, doesn't seem necessary (for now)
+
 ## dynamic programming, recursion
 
 - to handle the case where the board is infinite, we need to use dynamic programming and recursion
@@ -41,7 +60,6 @@ string format:
 def main():
   players = [Player("player_1"), Player("player_2")]
   board = Board(...)
-
   game = Game(board, players)
 ```
 
