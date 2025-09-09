@@ -136,3 +136,15 @@ class TestBoard(TestCase):
         grid = board.parse(board.board_str, squares)
         output={'0,0': '.', '0,1': '.', '0,2': '.', '1,0': '.', '1,1': '.', '1,2': '.', '2,0': '.', '2,1': '.', '2,2': '.'}
         self.assertEqual(grid, output)
+
+
+    def test_get_box_number_from_coordinate(self):
+        board = Board(dimension=9)
+    
+        self.assertEqual(board.get_box_index_from_coordinate("0,0"), 0)
+        self.assertEqual(board.get_box_index_from_coordinate("3,1"), 3)
+        self.assertEqual(board.get_box_index_from_coordinate("8,8"), 8)
+        
+    def test_get_box_from_coordinate(self):
+        board = Board(dimension=9)
+        self.assertEqual(board.get_box_from_coordinate("0,0"), ('0,0', '0,1', '0,2', '1,0', '1,1', '1,2', '2,0', '2,1', '2,2'))

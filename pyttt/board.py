@@ -17,12 +17,12 @@ class Board:
     """
 
     def __init__(
-        self,
-        variant: str | None = None,
-        dimension: int | None = None,
-        rows: int | None = None,
-        columns: int | None = None,
-        board_str: str | None = None,
+            self,
+            variant: str | None = None,
+            dimension: int | None = None,
+            rows: int | None = None,
+            columns: int | None = None,
+            board_str: str | None = None,
     ) -> None:
         self._config = {
             "variant": variant,
@@ -38,22 +38,19 @@ class Board:
         self.board_str = board_str
         # self.board = None
         if board_str is None:
-            self.board_str = self._init_board() # board string
-        
+            self.board_str = self._init_board()  # board string
+
         # self._squares = [Square(x, y) for x in range(self.get_dimension()) for y in range(self.get_dimension())]
         # print(self._squares)
 
         # TODO: implement state
         # self._state: BoardState = NormalState(self)
-        
+
         self._coords = self.get_coordinates_str(self.get_dimension())
         self.squares = self.cross(vector_a=self._coords, vector_b=self._coords)
         self._coords_3 = self.get_three_by_three(self._coords)
         self.boxes = self.get_all_boxes(rows=self._coords_3, cols=self._coords_3)
-        
-        
-        
-    
+
     def __str__(self):
         return self.board_str
 
@@ -68,34 +65,33 @@ class Board:
             - dimension (width of matrix)
             - rows and columns
         """
-        
+
         board_str = ""
-        
+
         if self._config["variant"] and (
-            self._config["dimension"] is None
-            and (self._config["rows"] is None and self._config["columns"] is None)
+                self._config["dimension"] is None
+                and (self._config["rows"] is None and self._config["columns"] is None)
         ):
             board_str = VariantStrategy(self._config).create_board()
 
         if self._config["dimension"] and (
-            self._config["variant"] is None
-            and (self._config["rows"] is None and self._config["columns"] is None)
+                self._config["variant"] is None
+                and (self._config["rows"] is None and self._config["columns"] is None)
         ):
-             board_str = DimensionStrategy(self._config).create_board()
+            board_str = DimensionStrategy(self._config).create_board()
 
         if (self._config["rows"] and self._config["columns"]) and (
-            self._config["variant"] is None and self._config["dimension"] is None
+                self._config["variant"] is None and self._config["dimension"] is None
         ):
             board_str = RowsColumnsStrategy(self._config).create_board()
 
         if not (
-            self._config["variant"]
-            or self._config["dimension"]
-            or (self._config["rows"] and self._config["columns"])
+                self._config["variant"]
+                or self._config["dimension"]
+                or (self._config["rows"] and self._config["columns"])
         ):
-            board_str = "." * 9 # classic ttt
-            
-        
+            board_str = "." * 9  # classic ttt
+
         return board_str
 
     # TODO
@@ -137,7 +133,7 @@ class Board:
             - 9x9 board
             - return = ('012', '345', '678')
         """
-        return tuple([board_str[i : i + 3] for i in range(0, len(board_str), 3)])
+        return tuple([board_str[i: i + 3] for i in range(0, len(board_str), 3)])
 
     def get_all_boxes(self, rows, cols) -> list:
         """
@@ -162,51 +158,6 @@ class Board:
             ]
         """
         return [self.cross(rs, cs) for rs in rows for cs in cols]
-
-
-
-
-    ##################################################################
-    # will probably not use
-    ##################################################################
-
-    def get_all_units(self, rows, cols, boxes) -> list:
-        return (
-            [self.cross(rows, c) for c in cols]
-            + [self.cross(r, cols) for r in rows]
-            + boxes
-        )
-
-    def get_units(self, squares, all_units) -> dict:
-        """
-        get all units that contain each square
-
-        a unit is a row, column, or box; each unit is a tuple of 9(or more) squares
-        """
-        return {s: tuple(u for u in all_units if s in u) for s in squares}
-
-    def get_peers(self, squares, units) -> dict:
-        """the squares that share a unit are called peers."""
-        return {s: set().union(*units[s]) - {s} for s in squares}
-
-    def parse(self, board_str, squares):
-        """Convert a string to a Tic-Tac-Toe grid."""
-        import re
-
-        vals = re.findall(r"[.XOxo]", board_str)
-        return {
-            s: v.lower() if v.lower() in "xo" else "." for s, v in zip(squares, vals)
-        }
-
-    ##################################################################
-
-
-
-
-
-
-
-
 
     def picture(self, grid, rows, cols):
         """
@@ -234,7 +185,33 @@ class Board:
 
         return "\n".join(result)
 
-    def get_board_str_from_box(self, box, grid):
+    def get_box_index_from_coordinate(self, xy: str) -> int | None:
+        """
+        get box number from coordinate
+        :param xy: 
+        :return: int
+        
+        :example:
+            - xy = "0,0"
+            - return = 0
+        """
+        for box in self.boxes:
+            if xy in box:
+                return self.boxes.index(box)
+
+    def get_box_from_coordinate(self, xy: str) -> tuple:
+        """
+        get box from coordinate
+        :param xy: 
+        :return: tuple
+        
+        :example:
+            - xy = "0,0"
+            - return = ('0,0', '0,1', '0,2', '1,0', '1,1', '1,2', '2,0', '2,1', '2,2')
+        """
+        return self.boxes[self.get_box_index_from_coordinate(xy)]
+
+    def get_board_str_from_box(self, box, grid) -> str:
         """
         get board string from box
         :param box: 
@@ -260,19 +237,51 @@ class Board:
     def to_list(self):
         return list(self.board_str)
 
+    ##################################################################
+    # will probably not use
+    ##################################################################
+
+    def get_all_units(self, rows, cols, boxes) -> list:
+        return (
+                [self.cross(rows, c) for c in cols]
+                + [self.cross(r, cols) for r in rows]
+                + boxes
+        )
+
+    def get_units(self, squares, all_units) -> dict:
+        """
+        get all units that contain each square
+
+        a unit is a row, column, or box; each unit is a tuple of 9(or more) squares
+        """
+        return {s: tuple(u for u in all_units if s in u) for s in squares}
+
+    def get_peers(self, squares, units) -> dict:
+        """the squares that share a unit are called peers."""
+        return {s: set().union(*units[s]) - {s} for s in squares}
+
+    def parse(self, board_str, squares):
+        """Convert a string to a Tic-Tac-Toe grid."""
+        import re
+
+        vals = re.findall(r"[.XOxo]", board_str)
+        return {
+            s: v.lower() if v.lower() in "xo" else "." for s, v in zip(squares, vals)
+        }
+
+    ##################################################################
+
     # TODO
     def place_mark(self):
         ...
-    
+
     def get_legal_move(self):
         pass
-    
+
     def get_allowed_boxes(self):
         """for ultimate tic-tac-toe"""
         if self.config is None or self.config["variant"] != "ultimate" or len(self.board_str) != 81:
             return ""
-        
+
         # allowed_boxes = ""
-        
-        
-        return 
+        return
