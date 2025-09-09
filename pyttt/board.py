@@ -46,6 +46,13 @@ class Board:
         # TODO: implement state
         # self._state: BoardState = NormalState(self)
         
+        self._coords = self.get_coordinates_str(self.get_dimension())
+        self.squares = self.cross(vector_a=self._coords, vector_b=self._coords)
+        self._coords_3 = self.get_three_by_three(self._coords)
+        self.boxes = self.get_all_boxes(rows=self._coords_3, cols=self._coords_3)
+        
+        
+        
     
     def __str__(self):
         return self.board_str
@@ -121,6 +128,15 @@ class Board:
         return tuple(a + "," + b for a in vector_a for b in vector_b)
 
     def get_three_by_three(self, board_str) -> tuple:
+        """
+        get 3x3 boards from board string
+        :param board_str: 
+        :return: tuple
+        
+        :example:
+            - 9x9 board
+            - return = ('012', '345', '678')
+        """
         return tuple([board_str[i : i + 3] for i in range(0, len(board_str), 3)])
 
     def get_all_boxes(self, rows, cols) -> list:

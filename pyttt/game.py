@@ -21,8 +21,75 @@ class Game:
         
         # TODO: 
         # self.t3n: str = self.t3n()
-        # self.score_board_str: str = None
+        self.score_board_str: str | None = None
+     
+       
+    def init_score_board(self) -> str:
+        """
+        initialize score board
         
+        output:
+        - if the board is 3x3, return ""
+        - if the board is 9x9, return "........."
+        - if the board is 27x27, return ".........;........./........./........./........./........./........./........./........./........."
+        - and so on
+        """
+        # print(self.board.get_dimension())
+        _dim = self.board.get_dimension()
+        # print("\n", _dim)
+        if _dim < 9:
+            return ""
+        
+        _result = []
+        
+        _boxes = self.board.boxes
+        _squares_count = len(self.board.squares)
+        
+        
+        
+        # print(_squares_count)
+        # print("\n", _boxes)
+        
+        import math 
+        
+        _squares_exponent = int(math.log(_squares_count, 3))
+        print("\n squares exponent", _squares_exponent)
+        
+        for i in range(2, _squares_exponent, 2):
+            _result.append("." * (3 ** i))
+            print(i)
+
+        _new_result = []
+        
+        for s in _result:
+            if len(s) > 9:
+                _new_result.append(self.insert_char_every_n(s, "/", 9))
+            else:
+                _new_result.append(s)
+        
+            
+        print("\n result: ", _new_result)
+        
+        # while _dim > 1:
+            # _dim //= 9
+            # for i in range(_dim):
+            #     _result.append("." * 9)
+            #     if self.board.get_dimension() != 9:
+            #         _result.append("/")
+
+        print("\n")
+        print("\n$$", ";".join(_new_result))
+        print("\n")
+        return ";".join(_new_result)
+
+    def insert_char_every_n(self, original_string, char_to_insert, n):
+        new_string = []
+        for i, char in enumerate(original_string):
+            new_string.append(char)
+            if (i + 1) % n == 0 and (i + 1) != len(original_string):
+                new_string.append(char_to_insert)
+        return "".join(new_string)
+
     def t3n(self):
         """
         tic-tac-toe game notation
@@ -68,6 +135,9 @@ class Game:
     def switch_turn(self, x, o):
         return x if self.turn == "x" else o
     
+    def place_mark(self):
+        # if self.board.config["variant"] == "ultimate":
+        return
 
     def place_mark_in_box(self, index):
         """places a mark in the given box(3x3 board)"""
