@@ -1,14 +1,44 @@
+from pyttt.board import Board
+from pyttt.player import Player
 from copy import deepcopy
 
+# default 3x3 board size (classic tic-tac-toe)
 DIM = 3
 SIZE = DIM * DIM
 
 
 class Game:
-    def __init__(self, board: str = "." * SIZE, turn: str = "x") -> None:
+    def __init__(self, board: Board | str = "." * SIZE, turn: str = "x", players: list[Player] = []) -> None:
         self.board = list(board)
-        # self.players = players
+        self.players = players
         self.turn = turn
+        
+    def t3n(self):
+        """
+        tic-tac-toe game notation
+        
+        components:
+            - current player's turn
+            - allowed box to place piece
+            - board string
+            
+        example:
+            - ultimate tic-tac-toe:
+                - "O;@........;X.OO...../X..X.O.O./X.X...O.O/.X.OXO.../O.O.X..../.XX....O./......X.O/.O.X.X.../.O.....XX" (example from ultimattt)
+        """
+        
+    def allowed_box(self):
+        """
+        This is only for ultimate tic-tac-toe
+        
+        returns the allowed box to place piece
+        """
+        if self.is_game_end():
+            return None
+        if self.board.count(".") == 9 and self.turn == "x" and not self.board.prev:
+            return "." * 9 
+        return
+        
 
     def __repr__(self):
         return "(%s, %s)" % (repr("".join(self.board)), repr(self.turn))
