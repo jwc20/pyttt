@@ -1,3 +1,9 @@
+"""
+TODO:
+consider changing this to facade pattern
+"""
+
+
 from dataclasses import dataclass
 from typing import Protocol
 
