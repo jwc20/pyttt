@@ -1,5 +1,20 @@
 # notes
 
+## Player object - where should it be (dependency) injected?
+
+- it could be injected into either the Game class or the Board class
+- in the [bncpy library](https://github.com/jwc20/bncpy) the Player object was injected into the Board class, because in one game, each players should have their own board
+- in pyttt, it might be better to have Player in the Game class since each players don't need their own board
+
+```python
+# example
+def main():
+  players = [Player("player_1"), Player("player_2")]
+  board = Board(...)
+
+  game = Game(board, players)
+```
+
 
 ## memoization/caching
 
