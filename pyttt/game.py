@@ -58,7 +58,6 @@ class Game:
             return "%s;%s;%s" % (_turn, _allowed_box, _board_str)
         return "%s;%s" % (_turn, _board_str)
     
-    
 
     def __repr__(self):
         return "(%s, %s)" % (repr("".join(self.board_list)), repr(self.turn))

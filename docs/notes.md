@@ -1,6 +1,19 @@
 # notes
 
 
+## more on score string 
+
+- we can use a string to represent the score of a box
+
+example:
+- classic tic-tac-toe -> no score string
+- ultimate tic-tac-toe (9x9 board)
+  - score string: "x..x..xo."
+- for larger ultimate tic-tac-toe (27x27 board), we need multiple score strings separated by semicolon
+  - "x...x...o;xxx....../........./........./........./..x.x.x../........./........./........./..o..o..o"
+
+
+
 ## future consideration: design patterns for win conditions for other variants ttt
 
 - might want to use strategy pattern
