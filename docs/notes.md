@@ -13,6 +13,10 @@ example:
   - "x...x...o;xxx....../........./........./........./..x.x.x../........./........./........./..o..o..o"
 
 
+![CleanShot 2025-09-09 at 14 29 55@2x](https://github.com/user-attachments/assets/90a656bf-54f1-49c1-ad22-59d8f334657e)
+
+
+
 
 ## future consideration: design patterns for win conditions for other variants ttt
 
