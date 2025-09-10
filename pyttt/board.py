@@ -46,10 +46,10 @@ class Board:
         # TODO: implement state
         # self._state: BoardState = NormalState(self)
 
-        self._coords = self.get_coordinates_str(self.get_dimension())
-        self.squares = self.cross(vector_a=self._coords, vector_b=self._coords)
-        self._coords_3 = self.get_three_by_three(self._coords)
-        self.boxes = self.get_all_boxes(rows=self._coords_3, cols=self._coords_3)
+        self.coords = self.get_coordinates_str(self.get_dimension())
+        self.squares = self.cross(vector_a=self.coords, vector_b=self.coords)
+        self.coords_3 = self.get_three_by_three(self.coords)
+        self.boxes = self.get_all_boxes(rows=self.coords_3, cols=self.coords_3)
         
         self.grid = self.parse(self.board_str, self.squares)
 
@@ -161,31 +161,48 @@ class Board:
         """
         return [self.cross(rs, cs) for rs in rows for cs in cols]
 
-    def picture(self, grid, rows, cols):
+    def display_board(self):
         """
         convert board string to grid
-
-        TODO:
-        (works only for 3x3 and 9x9 boards)
         """
-        if grid is None:
+        rows, cols = self.coords, self.coords
+        if self.grid is None:
             return "None"
-
-        width = 1 + max(len(grid[s]) for s in grid)
-        line = "+".join(["-" * (width * 3)] * (len(cols) // 3))
-
+        width = 1
         result = []
         for r in rows:
-            row_str = "".join(
-                grid[r + "," + c].center(width)
-                + ("|" if (int(c) + 1) % 3 == 0 and int(c) + 1 < len(cols) else "")
-                for c in cols
-            )
+            row_str = " ".join(self.grid[r + "," + c].center(width) for c in cols)
             result.append(row_str)
-            if (int(r) + 1) % 3 == 0 and int(r) + 1 < len(rows):
-                result.append(line)
-
         return "\n".join(result)
+
+    # def display_board(self):
+    #     """
+    #     convert board string to grid
+    # 
+    #     TODO:
+    #     (works only for 3x3 and 9x9 boards)
+    #     """
+    #     
+    #     rows, cols = self.coords, self.coords
+    #     
+    #     if self.grid is None:
+    #         return "None"
+    # 
+    #     width = 1 + max(len(self.grid[s]) for s in self.grid)
+    #     line = "+".join(["-" * (width * 3)] * (len(cols) // 3))
+    # 
+    #     result = []
+    #     for r in rows:
+    #         row_str = "".join(
+    #             self.grid[r + "," + c].center(width)
+    #             + ("|" if (int(c) + 1) % 3 == 0 and int(c) + 1 < len(cols) else "")
+    #             for c in cols
+    #         )
+    #         result.append(row_str)
+    #         if (int(r) + 1) % 3 == 0 and int(r) + 1 < len(rows):
+    #             result.append(line)
+    # 
+    #     return "\n".join(result)
 
     def get_box_index_from_coordinate(self, xy: str) -> int | None:
         """
