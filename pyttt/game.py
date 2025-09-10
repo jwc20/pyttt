@@ -67,9 +67,14 @@ class Game:
         _allowed_box = None
 
         _partitioned_board = []
-        for i in range(0, len(self.board_list), self.board.get_dimension()):
-            _partitioned_board.append(self.board_list[i: i + self.board.get_dimension()])
-            _partitioned_board.append("/")
+        _dim = self.board.get_dimension()
+        
+        if _dim > 3:
+            for i in range(0, len(self.board_list), _dim):
+                _partitioned_board.append(self.board_list[i: i + 9])
+                _partitioned_board.append("/")
+        else:
+            _partitioned_board = self.board_list
 
         _board = []
         for row in _partitioned_board:

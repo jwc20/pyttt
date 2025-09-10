@@ -66,12 +66,28 @@ if __name__ == "__main__":
 
     ###############################################
 
-    game = Game()
-    # 
+    # game = Game()
+    # print("dimension 3: ")
     # print("repr: ", game)
-    # print("t3n: ", game.t3n())
-
+    # print("t3n: ", game.set_t3n())
+    # print("\n")
+    # print(game.board.picture())
+    # print("\n")
+    # print("\n")
+    # 
     # game_ult = Game(Board(variant="ultimate"))
     # print("repr: ", game_ult)
-    # print("\n")
     # print("t3n: ", game_ult.set_t3n())
+    # print("\n")
+    # print(game_ult.board.picture())
+    # print("\n")
+    # print("\n")
+    # 
+    
+    game_dim_27 = Game(Board(dimension=(3 ** 3)))
+    print("repr: ", game_dim_27)
+    print("t3n: ", game_dim_27.set_t3n())
+    print("\n")
+    print(game_dim_27.board.display_board())
+    print("\n")
+    print("\n")

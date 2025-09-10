@@ -2,7 +2,7 @@
 
 ## state machine pattern revisted
 
-- deciding against using state machine pattern for now because of complextiy it adds and tight coupling it creates
+- deciding against using state machine pattern (for GameState and BoardState) for now because of complexity it adds and tight coupling it creates
 
 ```
 There are 4 states for the board:
