@@ -1,5 +1,27 @@
 # notes
 
+## score board
+
+- the ScoreBoard will inherit from the Board class
+- we can use the same utils methods for the ScoreBoard as the Board class
+
+construction:
+
+- if the Board object is 9x9, then the ScoreBoard object should be 3x3
+- if the Board object is 27x27, then the ScoreBoard object should have 3x3, 9x9
+
+example:
+
+```python
+board = Board(dimension=9)
+score_board = board.score_board
+
+# => board.t3n = "x;........./........./........./........./........./........./........./........./........./"
+# ==> score_board = "........."
+
+```
+
+
 ## state machine pattern revisted
 
 - deciding against using state machine pattern (for GameState and BoardState) for now because of complexity it adds and tight coupling it creates
