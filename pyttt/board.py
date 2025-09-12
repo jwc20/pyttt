@@ -168,10 +168,12 @@ class Board:
         """
         return [self.cross(rs, cs) for rs in rows for cs in cols]
 
-    def display_board(self):
+    def display_board(self, t: str | None = None):
         """
         convert board string to grid
         """
+        if t is None:
+            t = "value"
         rows, cols = self.coords, self.coords
         if self.grid is None:
             return "None"
@@ -180,7 +182,10 @@ class Board:
         for c in cols:
             result_row.append("\n")
             for r in rows:
-                result_row.append(self.grid[r + "," + c])
+                if t == "coordinate":
+                    result_row.append(str(r + "," + c).center(10))
+                else:
+                    result_row.append(self.grid[r + "," + c])
         result.append(" ".join(result_row))
         return "".join(result)
 
@@ -303,6 +308,10 @@ class Board:
     def place_mark(self, mark, xy):
         self.grid[xy] = mark
         self.board_str = "".join(self.grid.values())
+        # print(self.board_str)
+        # self.grid = self.convert_to_grid(self.board_str, self.squares)
+        # print(self.grid)
+        
         
 
     def get_legal_move(self):
