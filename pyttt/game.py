@@ -180,15 +180,22 @@ class Game:
         
         if player.mark != self.turn:
             raise ValueError("Player mark does not match turn")
-            
         
         self.board.place_mark(player.mark, xy)
         self.turn = self.switch_turn_in_box("o", "x")
-        
         self.board_list = self.board.to_list()
-        # print(self.board_list)
+        self.t3n = self.set_t3n()
         
-        print()
+        # TODO, this will be different if the game is ultimate tic-tac-toe
+        boxes = self.t3n.split(";")[-1].split("/")
+        # print(game_board_list[-1])
+        # print("\n")
+        
+        for i in range(len(boxes)):
+            # print(boxes[i])
+            # print("\n")
+            self.check_win_in_box(player.mark)
+        
         
 
     def set_allowed_box(self, box):

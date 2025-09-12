@@ -85,11 +85,11 @@ if __name__ == "__main__":
     # 
     
     _players = [Player("player_x", "x"), Player("player_o", "o")]
-    
     game_dim_27 = Game(Board(dimension=(3 ** 3)), players=_players)
-    print("repr: ", game_dim_27)
-    print("t3n: ", game_dim_27.set_t3n())
-    print("\n")
+    
+    # print("repr: ", game_dim_27)
+    # print("t3n: ", game_dim_27.set_t3n())
+    # print("\n")
     
     # game_squares = game_dim_27.board.squares
     # print("game squares: ")
@@ -101,14 +101,26 @@ if __name__ == "__main__":
     
     
     game_dim_27.place_mark(_players[0], "0,0")
-
+    game_dim_27.place_mark(_players[1], "2,1")
+    game_dim_27.place_mark(_players[0], "0,1")
+    game_dim_27.place_mark(_players[1], "1,1")
+    game_dim_27.place_mark(_players[0], "0,2")
     game_dim_27.place_mark(_players[1], "4,4")
+    
+    
     print(game_dim_27.board.display_board())
+    print("\n")
+    print(game_dim_27.score_board_str)
+    print("\n")
+
+    print("repr: ", game_dim_27)
+    print("t3n: ", game_dim_27.set_t3n())
+    print("\n")
     
     
     
     
-    for i in range(10):
-        print(3**i, "x", 3**i)
+    # for i in range(10):
+    #     print(3**i, "x", 3**i)
     
     # 3x3, 9x9, 27x27, 81x81, 243x243, 729x729, 2187x2187, 6561x6561, 19683x19683
