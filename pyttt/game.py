@@ -1,10 +1,12 @@
-import math
+# import math
 
 from pyttt.board import Board
 from pyttt.player import Player
 from copy import deepcopy
 
-from pyttt.utils import insert_char_every_n
+from pyttt.utils import place_mark
+
+# from pyttt.utils import insert_char_every_n
 
 # default 3x3 board size (classic tic-tac-toe)
 DIM = 3
@@ -31,26 +33,24 @@ class Game:
         self.t3n: str = self.set_t3n()
 
         # TODO: this probably dont have to be a string
-        self.score_board_str: str = self._init_score_board()
-
-    def _init_score_board(self) -> str:
-        import math
-
-        dimension = self.board.get_dimension()
-        if dimension < 9:
-            return ""
-
-        squares_count = len(self.board.squares)
-        squares_exponent = int(math.log(squares_count, 3))
-
-        segments = []
-        for i in range(2, squares_exponent, 2):
-            dots = "." * (3 ** i)
-            if len(dots) > 9:
-                dots = insert_char_every_n(dots, "/", 9)
-            segments.append(dots)
-
-        return ";".join(segments)
+        # self.score_board_str: str = self._init_score_board()
+    # 
+    # def _init_score_board(self) -> str:
+    #     dimension = self.board.get_dimension()
+    #     if dimension < 9:
+    #         return ""
+    # 
+    #     squares_count = len(self.board.squares)
+    #     squares_exponent = int(math.log(squares_count, 3))
+    # 
+    #     segments = []
+    #     for i in range(2, squares_exponent, 2):
+    #         dots = "." * (3 ** i)
+    #         if len(dots) > 9:
+    #             dots = insert_char_every_n(dots, "/", 9)
+    #         segments.append(dots)
+    # 
+    #     return ";".join(segments)
 
     def set_t3n(self):
         """
@@ -219,7 +219,7 @@ class Game:
         # print(is_win)
         
         if is_win:
-            score_board_parts = self.score_board_str.split(";")
+            score_board_parts = self.board.score_board.score_board_str.split(";")
             print("score_board_parts: ", score_board_parts)
             # score_board_parts[-1] =  
             
@@ -235,13 +235,26 @@ class Game:
                 _result = set()
                 for c in curr_box:
                     cc = c.split(",")
-                    _result.add(str(int(cc[0]) // 3) + "," + str(int(cc[1]) // 3))
+                    score_board_xy =str(int(cc[0]) // 3) + "," + str(int(cc[1]) // 3)
+                    _result.add(score_board_xy)
                     
                 print("_result: ", _result)
                 
                 if len(_result) == 1:
                     # update score board string
                     print("update")
+                    
+                    new_scoreboard_grid = place_mark(self.board.score_board.grid, player.mark, _result.pop())
+                    # self.board_str = "".join(self.grid.values())
+
+                    self.board.score_board.update_with_scoreboard_grid(new_scoreboard_grid)
+                    
+                    print("#########")
+                    print(self.board.score_board.score_board_str)
+                    
+                    
+                    
+                    
                 
                     
                 

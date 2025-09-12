@@ -1,4 +1,56 @@
 from pyttt.board_strategy import DimensionStrategy, RowsColumnsStrategy, VariantStrategy
+from pyttt.utils import insert_char_every_n, get_dimension, cross, get_coordinates, convert_to_grid
+import math
+
+class ScoreBoard:
+    def __init__(self):
+        self.score_board_str = ""
+        # if self.score_board_str == "":
+        #     self.score_board_str = self._init_score_board()
+        
+        self.history = []
+
+        self.dimension = get_dimension(self.score_board_str)
+        self.coords = get_coordinates(self.dimension)
+        self.squares = cross(vector_a=self.coords, vector_b=self.coords)
+        self.grid = convert_to_grid(self.score_board_str, self.squares)
+        
+        # self.squares = cross(self.score_board_str, )
+        if len(self.score_board_str) > 0:
+            self.dimension = get_dimension(self.score_board_str)
+            self.coords = get_coordinates(self.dimension)
+            self.squares = cross(vector_a=self.coords, vector_b=self.coords)
+            self.grid = convert_to_grid(self.score_board_str, self.squares)
+    
+
+    
+    def update_with_scoreboard_grid(self, grid):
+        self.grid = grid 
+        self.score_board_str = "".join(self.grid.values())
+    
+    def update(self,  board_str, event: str | None = None):
+        print(board_str)
+        dimension = get_dimension(board_str)
+        if dimension < 9:
+            return ""
+        
+        coords = get_coordinates(dimension)
+        squares = cross(vector_a=coords, vector_b=coords)
+        
+
+        squares_count = len(squares)
+        squares_exponent = int(math.log(squares_count, 3))
+
+        segments = []
+        for i in range(2, squares_exponent, 2):
+            dots = "." * (3 ** i)
+            if len(dots) > 9:
+                dots = insert_char_every_n(dots, "/", 9)
+            segments.append(dots)
+        
+        self.score_board_str = ";".join(segments)
+        return self.score_board_str
+        
 
 
 class Board:
@@ -34,6 +86,7 @@ class Board:
         self.next = None
         self.prev = None
         self.mark_history = []
+        self.history = []
 
         self.board_str = board_str
         # self.board = None
@@ -55,9 +108,54 @@ class Board:
         self.boxes = self.get_all_boxes(rows=self.coords_3, cols=self.coords_3)
         
         self.grid = self.convert_to_grid(self.board_str, self.squares)
+        
+        self.score_board: ScoreBoard | None = None
+        
+        if self.score_board is None:
+            self._init_score_board()
 
+
+
+    def _init_score_board(self) -> str:
+        self.score_board = ScoreBoard()
+        self.score_board.dimension = get_dimension(self.board_str)
+        if self.score_board.dimension < 9:
+            return ""
+
+        self.score_board.coords = get_coordinates(self.score_board.dimension)
+        self.score_board.squares = cross(vector_a=self.score_board.coords, vector_b=self.score_board.coords)
+        self.score_board.grid = convert_to_grid(self.score_board.score_board_str, self.score_board.squares)
+        
+        squares_count = len(self.score_board.squares)
+        squares_exponent = int(math.log(squares_count, 3))
+
+        segments = []
+        for i in range(2, squares_exponent, 2):
+            dots = "." * (3 ** i)
+            if len(dots) > 9:
+                dots = insert_char_every_n(dots, "/", 9)
+            segments.append(dots)
+
+        return ";".join(segments)
+    
+    
     def __str__(self):
         return self.board_str
+    
+    def attach_score_board(self, score_board: ScoreBoard):
+        self.score_board = score_board
+        
+        if len(score_board.score_board_str) == 0:
+            self.score_board.update(board_str=self.board_str)
+        
+        
+        
+    def detach_score_board(self):
+        self.score_board = None
+        
+    def notify_score_board(self, event_type: str, data):
+        if self.score_board:
+            self.score_board.update(event_type, self.board_str)
 
     @property
     def config(self) -> dict:
@@ -324,3 +422,6 @@ class Board:
 
         # allowed_boxes = ""
         return
+
+
+

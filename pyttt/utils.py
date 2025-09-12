@@ -11,6 +11,9 @@ def insert_char_every_n(original_string, char_to_insert, n):
 #########################################################
 # board utils ###########################################
 #########################################################
+def get_dimension(board_str) -> int:
+    return int(len(board_str) ** (1 / 2))
+
 
 def get_coordinates(dim: int) -> list:
     # return "".join([str(i) for i in range(dim)])
@@ -134,3 +137,18 @@ def get_board_str_from_box(box, grid) -> str:
         square_value = get_square_value(xy, grid)
         result.append(square_value)
     return "".join(result)
+
+
+def convert_to_grid(board_str, squares):
+    """Convert a string to a Tic-Tac-Toe grid."""
+    import re
+
+    vals = re.findall(r"[.XOxo]", board_str)
+    return {
+        s: v.lower() if v.lower() in "xo" else "." for s, v in zip(squares, vals)
+    }
+
+def place_mark(grid, mark, xy):
+    grid[xy] = mark
+    
+    return grid

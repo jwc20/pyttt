@@ -1,6 +1,8 @@
 from pyttt import Board, Game, Player
 from pprintpp import pprint
 
+from pyttt.board import ScoreBoard
+
 if __name__ == "__main__":
     pprint("hello")
     _board_str = Board(dimension=(3 ** 2))
@@ -85,7 +87,10 @@ if __name__ == "__main__":
     # 
     
     _players = [Player("player_x", "x"), Player("player_o", "o")]
-    game_dim_27 = Game(Board(dimension=(3 ** 3)), players=_players)
+
+    board = Board(dimension=(3 ** 3))
+    board.attach_score_board(score_board=ScoreBoard())
+    game_dim_27 = Game(board, players=_players)
     
     # print("repr: ", game_dim_27)
     # print("t3n: ", game_dim_27.set_t3n())
@@ -111,7 +116,7 @@ if __name__ == "__main__":
     
     print(game_dim_27.board.display_board())
     print("\n")
-    print(game_dim_27.score_board_str)
+    print(game_dim_27.board.score_board.score_board_str)
     print("\n")
 
     print("repr: ", game_dim_27)
