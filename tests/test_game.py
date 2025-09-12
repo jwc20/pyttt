@@ -110,12 +110,12 @@ class TestInitScoreBoard(TestCase):
 class TestGamePlaceMark(TestCase):
     def test_place_mark_3x3(self):
         game = Game(Board(dimension=3))
-        game.place_mark(Player(name="player_x", mark="x"), "0,0")
+        game.mark(Player(name="player_x", mark="x"), "0,0")
         
         # TODO: assert
         
     def test_place_mark_9x9(self):
         game = Game(Board(dimension=9))
-        game.place_mark(Player(name="player_x", mark="x"), "0,0")
+        game.mark(Player(name="player_x", mark="x"), "0,0")
         
         # TODO: assert

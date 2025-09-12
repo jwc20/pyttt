@@ -100,12 +100,13 @@ if __name__ == "__main__":
     print("\n")
     
     
-    game_dim_27.place_mark(_players[0], "0,0")
-    game_dim_27.place_mark(_players[1], "2,1")
-    game_dim_27.place_mark(_players[0], "0,1")
-    game_dim_27.place_mark(_players[1], "1,1")
-    game_dim_27.place_mark(_players[0], "0,2")
-    game_dim_27.place_mark(_players[1], "4,4")
+    game_dim_27.mark(_players[0], "0,0")
+    game_dim_27.mark(_players[1], "2,1")
+    game_dim_27.mark(_players[0], "0,1")
+    game_dim_27.mark(_players[1], "1,1")
+    game_dim_27.mark(_players[0], "0,2")
+    game_dim_27.mark(_players[1], "4,4")
+    game_dim_27.mark(_players[0], "3,0")
     
     
     print(game_dim_27.board.display_board())
