@@ -1,4 +1,4 @@
-from pyttt import Board, Game
+from pyttt import Board, Game, Player
 from pprintpp import pprint
 
 if __name__ == "__main__":
@@ -6,7 +6,7 @@ if __name__ == "__main__":
     _board_str = Board(dimension=(3 ** 2))
 
     _dim = _board_str.get_dimension()
-    _coords = _board_str.get_coordinates_str(_dim)
+    _coords = _board_str.get_coordinates(_dim)
     _rows, _cols = _coords, _coords
     _squares = _board_str.cross(_rows, _cols)
     _coords_3 = _board_str.get_three_by_three(_coords)
@@ -20,14 +20,14 @@ if __name__ == "__main__":
     # pprint(_squares)
     # pprint("coords_3", _coords_3)
     # pprint(_coords_3)
-    pprint(_all_boxes)
+    # pprint(_all_boxes)
     # pprint(_all_units)
     # pprint(_units)
     # pprint(_peers)
     # pprint(_units["0,0"])
     # pprint(_peers["0,0"])
 
-    _grid = _board_str.parse(_board_str.board_str, _squares)
+    _grid = _board_str.convert_to_grid(_board_str.board_str, _squares)
 
     # print(_grid)
     # print(_board_str.picture(_grid, _rows, _cols))
@@ -84,10 +84,31 @@ if __name__ == "__main__":
     # print("\n")
     # 
     
-    game_dim_27 = Game(Board(dimension=(3 ** 3)))
+    _players = [Player("player_x", "x"), Player("player_o", "o")]
+    
+    game_dim_27 = Game(Board(dimension=(3 ** 3)), players=_players)
     print("repr: ", game_dim_27)
     print("t3n: ", game_dim_27.set_t3n())
     print("\n")
+    
+    # game_squares = game_dim_27.board.squares
+    # print("game squares: ")
+    # pprint(game_squares)
+    
+    # print(game_dim_27.board.display_board())
+    print("\n")
+    print("\n")
+    
+    
+    game_dim_27.place_mark(_players[0], "0,0")
+
+    game_dim_27.place_mark(_players[1], "4,4")
     print(game_dim_27.board.display_board())
-    print("\n")
-    print("\n")
+    
+    
+    
+    
+    for i in range(10):
+        print(3**i, "x", 3**i)
+    
+    # 3x3, 9x9, 27x27, 81x81, 243x243, 729x729, 2187x2187, 6561x6561, 19683x19683

@@ -46,12 +46,15 @@ class Board:
         # TODO: implement state
         # self._state: BoardState = NormalState(self)
 
-        self.coords = self.get_coordinates_str(self.get_dimension())
+        if dimension is None:
+            dimension = self.get_dimension()
+            
+        self.coords = self.get_coordinates(dimension)
         self.squares = self.cross(vector_a=self.coords, vector_b=self.coords)
         self.coords_3 = self.get_three_by_three(self.coords)
         self.boxes = self.get_all_boxes(rows=self.coords_3, cols=self.coords_3)
         
-        self.grid = self.parse(self.board_str, self.squares)
+        self.grid = self.convert_to_grid(self.board_str, self.squares)
 
     def __str__(self):
         return self.board_str
@@ -114,8 +117,9 @@ class Board:
     def get_dimension(self) -> int:
         return int(len(self.board_str) ** (1 / 2))
 
-    def get_coordinates_str(self, dim: int) -> str:
-        return "".join([str(i) for i in range(dim)])
+    def get_coordinates(self, dim: int) -> list:
+        # return "".join([str(i) for i in range(dim)])
+        return [str(i) for i in range(dim)]
 
     def cross(self, vector_a, vector_b) -> tuple:
         """
@@ -123,9 +127,11 @@ class Board:
         (does not work for non-square matrices) -> TODO
         do cross product of rows and columns to get all possible 3x3 boards
         """
+        
+        
         return tuple(a + "," + b for a in vector_a for b in vector_b)
 
-    def get_three_by_three(self, board_str) -> tuple:
+    def get_three_by_three(self, coords: list) -> tuple:
         """
         get 3x3 boards from board string
         :param board_str: 
@@ -135,7 +141,8 @@ class Board:
             - 9x9 board
             - return = ('012', '345', '678')
         """
-        return tuple([board_str[i: i + 3] for i in range(0, len(board_str), 3)])
+        coord_str = "".join(coords)
+        return tuple([coord_str[i: i + 3] for i in range(0, len(coord_str), 3)])
 
     def get_all_boxes(self, rows, cols) -> list:
         """
@@ -168,12 +175,14 @@ class Board:
         rows, cols = self.coords, self.coords
         if self.grid is None:
             return "None"
-        width = 1
+        result_row = []
         result = []
-        for r in rows:
-            row_str = " ".join(self.grid[r + "," + c].center(width) for c in cols)
-            result.append(row_str)
-        return "\n".join(result)
+        for c in cols:
+            result_row.append("\n")
+            for r in rows:
+                result_row.append(self.grid[r + "," + c])
+        result.append(" ".join(result_row))
+        return "".join(result)
 
     # def display_board(self):
     #     """
@@ -279,7 +288,7 @@ class Board:
         """the squares that share a unit are called peers."""
         return {s: set().union(*units[s]) - {s} for s in squares}
 
-    def parse(self, board_str, squares):
+    def convert_to_grid(self, board_str, squares):
         """Convert a string to a Tic-Tac-Toe grid."""
         import re
 
