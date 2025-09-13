@@ -24,14 +24,23 @@ import math
 
 
 class ScoreBoard:
-    def __init__(self):
-        self.score_board_str = ""
+    def __init__(self, board_str: str = ""):
+        self.score_board_str = board_str
         self.history = []
+        
+        if board_str:
 
-        self.dimension = get_dimension(self.score_board_str) if self.score_board_str else 0
-        self.coords = get_coordinates(self.dimension) if self.dimension > 0 else []
-        self.squares = cross(vector_a=self.coords, vector_b=self.coords) if self.coords else tuple()
-        self.grid = convert_to_grid(self.score_board_str, self.squares) if self.squares else {}
+            self.dimension = get_dimension(self.score_board_str) if self.score_board_str else 0
+            self.coords = get_coordinates(self.dimension) if self.dimension > 0 else []
+            self.squares = cross(vector_a=self.coords, vector_b=self.coords) if self.coords else tuple()
+            self.grid = convert_to_grid(self.score_board_str, self.squares) if self.squares else {}
+        else:
+            self.dimension = 0
+            self.coords = []
+            self.squares = tuple()
+            self.grid = {}
+
+        
 
     def update_with_scoreboard_grid(self, grid):
         self.grid = grid 
