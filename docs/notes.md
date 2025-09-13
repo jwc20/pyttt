@@ -1,5 +1,21 @@
 # notes
 
+## `cross()` in `utils.py`: performance
+
+- in `cross()` function, use list of tuple or tuple of strings?
+
+  - example:
+    - list of tuple:
+      - `[(0,0), (0,1), (0,2), (1,0), (1,1), (1,2), (2,0), (2,1), (2,2)]`
+    - tuple of strings:
+      - `("0,0", "0,1", "0,2", "1,0", "1,1", "1,2", "2,0", "2,1", "2,2")`
+
+typically we use a list if the items are mutable, but since the coordinates are immutable for a board, i decided to use tuple.
+
+the issue is that using a strings for coordinates (e.g. `"0,0"`) requires constant parsing and string operations, which can cause performance overhead.
+
+however, since we can use `self.grid`, we can avoid the need to parse the coordinates.
+
 ## score board
 
 - the ScoreBoard will inherit from the Board class
