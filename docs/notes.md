@@ -1,9 +1,13 @@
 # notes
 
 
+
 ## backtracking, recursion
 
-- to handle the case where the board is large, we need to use bactracking and recursion
+- initially thought that i need to use dynammic programming or backtracking for getting wins in large board ttt 
+- it looks like we can use recursive checking instead
+
+- Claude recommends using monte carlo tree search
 
 - check 3x3 board(called a box) for win condition
 - we keep a score string to represent if the box is won
