@@ -1,5 +1,22 @@
 # notes
 
+
+## backtracking, recursion
+
+- to handle the case where the board is large, we need to use bactracking and recursion
+
+- check 3x3 board(called a box) for win condition
+- we keep a score string to represent if the box is won
+    - example:
+        - if at top-left box (`boxes[0]`), we have "xxx......" (the box is won by x)
+        - then the board string should be "x........"
+
+![CleanShot 2025-09-09 at 13 51 03@2x](https://github.com/user-attachments/assets/ac3e2b4e-fde9-4a00-8cd1-3cbe1add28c0)
+
+string format:
+
+- a 3x3 board has a t3n (tic-tac-toe notation) of "o;xoxoxoxox"
+
 ## `cross()` in `utils.py`: performance
 
 - in `cross()` function, use list of tuple or tuple of strings?
@@ -15,6 +32,7 @@ typically we use a list if the items are mutable, but since the coordinates are 
 the issue is that using a strings for coordinates (e.g. `"0,0"`) requires constant parsing and string operations, which can cause performance overhead.
 
 however, since we can use `self.grid`, we can avoid the need to parse the coordinates.
+also, we want to store the coordinate strings as keys in the `self.grid`
 
 ## score board
 
@@ -108,22 +126,6 @@ class Square:
 
 - prob not, doesn't seem necessary (for now)
 
-## dynamic programming, recursion
-
-- to handle the case where the board is infinite, we need to use dynamic programming and recursion
-- we need to use memoization to avoid redundant calculation
-
-- check 3x3 board (box, classic tic-tac-toe) for win condition, ... (recursion)
-- we keep a score string to represent if the box is won
-    - example:
-        - if at top-left box (`boxes[0]`), we have "xxx......" (the box is won by x)
-        - then the board string should be "x........"
-
-![CleanShot 2025-09-09 at 13 51 03@2x](https://github.com/user-attachments/assets/ac3e2b4e-fde9-4a00-8cd1-3cbe1add28c0)
-
-string format:
-
-- a 3x3 board has a t3n (tic-tac-toe notation) of "o;xoxoxoxox"
 
 ## which class should be responsible for making moves by players?
 
