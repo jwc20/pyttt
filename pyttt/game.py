@@ -1,3 +1,7 @@
+"""
+pyttt/game.py
+"""
+
 # import math
 
 from pyttt.board import Board

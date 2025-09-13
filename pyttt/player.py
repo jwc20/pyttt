@@ -1,3 +1,7 @@
+"""
+pyttt/player.py
+"""
+
 class Player:
     """
     this class exists to distinguish between players and set the mark ("x" or "o")

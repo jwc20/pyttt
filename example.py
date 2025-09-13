@@ -1,3 +1,7 @@
+"""
+example.py
+"""
+
 from pyttt import Board, Game, Player
 from pprintpp import pprint
 
