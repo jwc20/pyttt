@@ -18,8 +18,13 @@ from pyttt.utils import (
     get_all_units,
     get_units,
     get_peers,
+    partition_board_string,
+    get_all_squares,
 )
 import math
+
+
+
 
 
 class Board:
@@ -31,6 +36,7 @@ class Board:
             columns: int | None = None,
             board_str: str | None = None,
     ) -> None:
+        # for initializing board
         self._config = {
             "variant": variant,
             "dimension": dimension,
@@ -42,22 +48,19 @@ class Board:
         if board_str is None:
             self.board_str = self._init_board()
 
-        self.dimension = self.get_dimension()
-        self.coords = get_coordinates(self.dimension)
-        self.squares = cross(vector_a=self.coords, vector_b=self.coords)
-        self.coords_3 = get_three_by_three(self.coords)
-        self.boxes = get_all_boxes(rows=self.coords_3, cols=self.coords_3)
+        
+        # TODO:
+        self.boxes = get_all_boxes(self.board_str)
+        self.board_map = convert_to_grid(self.board_str, get_all_squares(self.board_str))
+        # self.partitioned_board = self.partition_board_string(self.board_str)
 
-        self.grid = convert_to_grid(self.board_str, self.squares)
-
-        self.level = self.get_level()
-        self.partitioned_board = self.partition_board_string(self.board_str)
-
+        #############################
         # TODO: implement board state
         self.next = None
         self.prev = None
         self.mark_history = []
         self.history = []
+        #############################
 
     def get_level(self):
         board_length = len(self.board_str)
@@ -102,39 +105,12 @@ class Board:
 
         return board_str
 
-    def get_dimension(self) -> int:
-        return get_dimension(self.board_str)
-
-    def display_board(self, t: str | None = None):
-        return display_board_util(self.coords, self.grid, t)
-
-    def get_box_index_from_coordinate(self, xy: str) -> int | None:
-        return get_box_index_from_coordinate(xy, self.boxes)
-
-    def get_box_from_coordinate(self, xy: str) -> tuple:
-        return get_box_from_coordinate(xy, self.boxes)
-
-    def get_board_str_from_box(self, box, grid) -> str:
-        return get_board_str_from_box(box, grid)
-
-    def get_square_value(self, xy, grid):
-        return get_square_value(xy, grid)
-
     def to_list(self):
         return list(self.board_str)
 
-    def get_all_units(self, rows, cols, boxes) -> list:
-        return get_all_units(rows, cols, boxes)
-
-    def get_units(self, squares, all_units) -> dict:
-        return get_units(squares, all_units)
-
-    def get_peers(self, squares, units) -> dict:
-        return get_peers(squares, units)
-
     def place_mark(self, mark, xy):
-        self.grid[xy] = mark
-        self.board_str = "".join(self.grid.values())
+        self.board_map[xy] = mark
+        self.board_str = "".join(self.board_map.values())
 
     def get_legal_move(self):
         pass
@@ -143,19 +119,3 @@ class Board:
         if self.config is None or self.config["variant"] != "ultimate" or len(self.board_str) != 81:
             return ""
         return
-
-    def partition_board_string(self, board_string: str):
-        partitioned_board = []
-        dimension = self.get_dimension()
-
-        if dimension > 3:
-            for i in range(0, len(board_string), dimension):
-                partitioned_board.append(board_string[i: i + 9])
-                partitioned_board.append("/")
-        else:
-            partitioned_board = board_string
-
-        if partitioned_board[-1] == "/":
-            partitioned_board.pop()
-
-        return "".join(partitioned_board)

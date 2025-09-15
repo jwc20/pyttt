@@ -2,6 +2,7 @@
 pyttt/utils.py
 """
 
+
 def insert_char_every_n(original_string, char_to_insert, n):
     new_string = []
     for i, char in enumerate(original_string):
@@ -28,9 +29,21 @@ def get_three_by_three(coords: list) -> tuple:
     return tuple([coord_str[i: i + 3] for i in range(0, len(coord_str), 3)])
 
 
-def get_all_boxes(rows, cols) -> list:
+def get_boxes(rows, cols):
     return [cross(rs, cs) for rs in rows for cs in cols]
 
+def get_all_squares(grid: str):
+    dimension = get_dimension(grid)
+    coords = get_coordinates(dimension)
+    return cross(coords, coords)
+
+def get_all_boxes(grid: str) -> list:
+    dimension = get_dimension(grid)
+    coords = get_coordinates(dimension)
+    coords_3 = get_three_by_three(coords)
+    rows, cols = coords_3, coords_3
+    return get_boxes(rows, cols)
+    
 
 def display_board(coords, grid, t: str | None = None):
     if t is None:
@@ -100,3 +113,20 @@ def get_units(squares, all_units) -> dict:
 
 def get_peers(squares, units) -> dict:
     return {s: set().union(*units[s]) - {s} for s in squares}
+
+
+def partition_board_string(board_string: str):
+    partitioned_board = []
+    dimension = get_dimension(board_string)
+
+    if dimension > 3:
+        for i in range(0, len(board_string), dimension):
+            partitioned_board.append(board_string[i: i + 9])
+            partitioned_board.append("/")
+    else:
+        partitioned_board = board_string
+
+    if partitioned_board[-1] == "/":
+        partitioned_board.pop()
+
+    return "".join(partitioned_board)

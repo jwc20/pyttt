@@ -12,4 +12,8 @@ if __name__ == "__main__":
 
     board = Board(dimension=9)
     game = Game(board)
+    
     pprint(game)
+    
+    
+    print(game.board)

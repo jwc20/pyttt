@@ -2,6 +2,13 @@
 
 ---
 
+## board representations
+
+- standard string
+- partitioned string
+- t3n string
+- meta board
+
 ## winner checking logic/algorithm
 
 (Bottom-up approach through hierarchical levels)

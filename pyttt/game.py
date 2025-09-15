@@ -28,39 +28,39 @@ class Game:
         self.players = players
         self.turn = turn
 
-        self.t3n: str = self.set_t3n()
+        # self.t3n: str = self.set_t3n()
 
-    def set_t3n(self):
-        """
-        tic-tac-toe game notation
-        
-        components:
-            - current player's turn
-            - allowed box to place mark
-            - board string
-            
-        example:
-            - ultimate tic-tac-toe:
-                - "O;@........;X.OO...../X..X.O.O./X.X...O.O/.X.OXO.../O.O.X..../.XX....O./......X.O/.O.X.X.../.O.....XX" (example from ultimattt)
-        """
-        _turn = repr(self.turn)
-        _allowed_box = None
-
-        _board = []
-        for row in self.board.partitioned_board:
-            _board += row
-
-        _board_str = "".join(_board)
-
-        if self.board.config["variant"] == "ultimate":
-            # TODO
-            _allowed_box = "........."
-
-            return "%s;%s;%s" % (_turn, _allowed_box, _board_str)
-        return "%s;%s" % (_turn, _board_str)
+    # def set_t3n(self):
+    #     """
+    #     tic-tac-toe game notation
+    #     
+    #     components:
+    #         - current player's turn
+    #         - allowed box to place mark
+    #         - board string
+    #         
+    #     example:
+    #         - ultimate tic-tac-toe:
+    #             - "O;@........;X.OO...../X..X.O.O./X.X...O.O/.X.OXO.../O.O.X..../.XX....O./......X.O/.O.X.X.../.O.....XX" (example from ultimattt)
+    #     """
+    #     _turn = repr(self.turn)
+    #     _allowed_box = None
+    # 
+    #     _board = []
+    #     for row in self.board.partitioned_board:
+    #         _board += row
+    # 
+    #     _board_str = "".join(_board)
+    # 
+    #     if self.board.config["variant"] == "ultimate":
+    #         # TODO
+    #         _allowed_box = "........."
+    # 
+    #         return "%s;%s;%s" % (_turn, _allowed_box, _board_str)
+    #     return "%s;%s" % (_turn, _board_str)
 
     def __repr__(self):
-        return "(%s, %s)" % (repr("".join(self.board_list)), repr(self.turn))
+        return "(%s, %s)" % (repr(self.turn), repr("".join(self.board_list)), )
 
     def __eq__(self, other):
         return self.board_list == other.board_list and self.turn == other.turn
@@ -79,7 +79,7 @@ class Game:
         box_dict = {}
 
         for key in box:
-            box_dict[key] = self.board.grid.get(key)
+            box_dict[key] = self.board.board_map.get(key)
 
         # print(box_dict)
 
