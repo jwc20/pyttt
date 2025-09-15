@@ -13,7 +13,6 @@ from pyttt.utils import (
     get_all_boxes,
     get_all_units,
     get_units,
-    get_peers
 )
 
 

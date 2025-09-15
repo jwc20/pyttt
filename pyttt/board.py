@@ -24,20 +24,21 @@ import math
 
 
 class ScoreBoard:
-    def __init__(self, board_str: str = ""):
-        self.score_board_str = board_str
+    def __init__(self, board_str: str):
+        self.score_board_str = "." * (len(board_str) // 3)
         self.history = []
         
         if board_str:
-
             self.dimension = get_dimension(self.score_board_str) if self.score_board_str else 0
             self.coords = get_coordinates(self.dimension) if self.dimension > 0 else []
             self.squares = cross(vector_a=self.coords, vector_b=self.coords) if self.coords else tuple()
+            self.boxes = get_all_boxes(rows=self.coords, cols=self.coords) if self.coords else tuple()
             self.grid = convert_to_grid(self.score_board_str, self.squares) if self.squares else {}
         else:
             self.dimension = 0
             self.coords = []
             self.squares = tuple()
+            self.boxes = tuple()
             self.grid = {}
 
         
@@ -47,10 +48,10 @@ class ScoreBoard:
         self.score_board_str = "".join(self.grid.values())
     
     def update(self, board_str, event: str | None = None):
-        print(board_str)
+        # print(board_str)
         dimension = get_dimension(board_str)
-        if dimension < 9:
-            return ""
+        # if dimension < 9:
+        #     return ""
         
         coords = get_coordinates(dimension)
         squares = cross(vector_a=coords, vector_b=coords)
@@ -94,31 +95,42 @@ class Board:
         if board_str is None:
             self.board_str = self._init_board()
 
-        if dimension is None:
-            dimension = self.get_dimension()
-            
-        self.coords = get_coordinates(dimension)
+        # if dimension is None:
+        #     self.dimension = self.get_dimension()
+        self.dimension = self.get_dimension()
+        self.coords = get_coordinates(self.dimension)
         self.squares = cross(vector_a=self.coords, vector_b=self.coords)
         self.coords_3 = get_three_by_three(self.coords)
         self.boxes = get_all_boxes(rows=self.coords_3, cols=self.coords_3)
         
         self.grid = convert_to_grid(self.board_str, self.squares)
         
+        # self.depth = int(math.log(self.dimension * self.dimension, 3))
+        self.level = self.get_level()
+        self.partitioned_board = self.partition_board()
         self.score_board: ScoreBoard | None = None
         
         if self.score_board is None:
             self._init_score_board()
+            
+        
+
+    def get_level(self):
+        board_length = len(self.board_str)
+        return (int(math.log(board_length, 3)) // 2) - 1 
+        
+
 
     def _init_score_board(self) -> str:
-        self.score_board = ScoreBoard()
-        self.score_board.dimension = get_dimension(self.board_str)
-        if self.score_board.dimension < 9:
-            return ""
-
-        self.score_board.coords = get_coordinates(self.score_board.dimension)
-        self.score_board.squares = cross(vector_a=self.score_board.coords, vector_b=self.score_board.coords)
-        self.score_board.grid = convert_to_grid(self.score_board.score_board_str, self.score_board.squares)
-        
+        self.score_board = ScoreBoard(self.board_str)
+        # self.score_board.dimension = get_dimension(self.board_str)
+        # # if self.score_board.dimension < 9:
+        # #     return ""
+        # 
+        # self.score_board.coords = get_coordinates(self.score_board.dimension)
+        # self.score_board.squares = cross(vector_a=self.score_board.coords, vector_b=self.score_board.coords)
+        # self.score_board.grid = convert_to_grid(self.score_board.score_board_str, self.score_board.squares)
+        # 
         squares_count = len(self.score_board.squares)
         squares_exponent = int(math.log(squares_count, 3))
 
@@ -227,3 +239,19 @@ class Board:
         if self.config is None or self.config["variant"] != "ultimate" or len(self.board_str) != 81:
             return ""
         return
+    
+    def partition_board(self):
+        _partitioned_board = []
+        _dim = self.get_dimension()
+
+        if _dim > 3:
+            for i in range(0, len(self.board_str), _dim):
+                _partitioned_board.append(self.board_str[i: i + 9])
+                _partitioned_board.append("/")
+        else:
+            _partitioned_board = self.board_str
+        
+        if _partitioned_board[-1] == "/":
+            _partitioned_board.pop()
+        
+        return "".join(_partitioned_board)

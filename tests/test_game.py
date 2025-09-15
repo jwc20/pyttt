@@ -3,6 +3,8 @@ from unittest import TestCase
 from pyttt import Player
 from pyttt.game import Game
 from pyttt.board import Board
+
+
 # from pyttt.player import Player
 
 
@@ -119,3 +121,39 @@ class TestGamePlaceMark(TestCase):
         game.mark(Player(name="player_x", mark="x"), "0,0")
         
         # TODO: assert
+        
+
+
+class TestGameWin(TestCase):
+    def test_win_3x3(self):
+        board = Board(dimension=3)
+        # board.attach_score_board(ScoreBoard())
+        game = Game(board=board)
+        game.mark(Player(name="player_x", mark="x"), "0,0")
+        game.mark(Player(name="player_o", mark="o"), "1,1")
+        game.mark(Player(name="player_x", mark="x"), "0,1")
+        game.mark(Player(name="player_o", mark="o"), "2,2")
+        game.mark(Player(name="player_x", mark="x"), "0,2")
+        # print(game.board.display_board())
+        # print(game.board.board_str)
+        # print(game.t3n)
+        # print(game.board.level)
+        # print(game.board.boxes)
+        # print(game.board.partitioned_board)
+        # print("score_board: ", game.board.score_board.score_board_str)
+        # winner = game.get_game_winner()
+        # print(winner)
+        
+    def test_win_9x9(self):
+        game = Game(Board(dimension=9))
+        game.mark(Player(name="player_x", mark="x"), "0,0")
+        game.mark(Player(name="player_o", mark="o"), "1,1")
+        game.mark(Player(name="player_x", mark="x"), "0,1")
+        game.mark(Player(name="player_o", mark="o"), "2,2")
+        game.mark(Player(name="player_x", mark="x"), "0,2")
+        # print(game.board.display_board())
+        # print(game.board.board_str)
+        # print(game.t3n)
+        # print(game.board.level)
+        winner = game.get_game_winner()
+        print(winner)
