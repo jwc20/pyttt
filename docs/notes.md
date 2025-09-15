@@ -18,6 +18,7 @@
 - The recursion depth `L` is the number of hierarchical levels in the game
   - The side length `d = 3^L`
   - The total cells `n = d² = 3^(2L)`
+  - then `L = log(n, 3) / 2`
   
 ### Example:
 - Suppose the board t3n string is `"x;........./........./........./........./........./........./........./........./........./"`
