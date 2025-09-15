@@ -1,6 +1,23 @@
 # notes
 
+## winner checking logic/algorithm
 
+(bottom-up approach, check each box for win condition, then )
+
+- check **each** box(3x3 board) for win condition
+- after checking all boxes, go up a level and check for win condition 
+  - repeat until the top level
+  
+- The recursion depth `L` is the number of hierarchical levels in the game
+  - The side length `d = 3^L`
+  - The total cells `n = d² = 3^(2L)`
+  - example:
+    - suppose that the board t3n string is `"x;........./........./........./........./........./........./........./........./........./"`
+      - observe that the board string (`board_str`) has length 81 characters
+        - then `n = 81 total cells`
+        - since `n = 3^(2L)`, we have `81 = 3^4`, so `2L = 4`, thus `L = 2`
+        - therefore the board is a 9×9 grid (since `d = 3^L = 3^2 = 9`)
+        - this is a standard Ultimate TTT with recursion depth L = 2
 
 ## backtracking, recursion
 
